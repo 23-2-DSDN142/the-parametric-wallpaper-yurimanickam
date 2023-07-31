@@ -20,4 +20,5 @@ function wallpaper_background() {
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
   rect(40 ,40, rect_width, rect_height);
+  //test push
 }
