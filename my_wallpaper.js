@@ -130,9 +130,37 @@ function carBody(){
   translate(shapeX, shapeY); // Move the shape based on shapeX and shapeY
   fill("#D67070");
   stroke("#D67070");
-  
   beginShape();
   curveVertex(106.06 * scalingFactor, 18.28 * scalingFactor);
+  curveVertex(106.06 * scalingFactor, 18.28 * scalingFactor);
+  curveVertex(88.66 * scalingFactor, 11.81 * scalingFactor);
+  curveVertex(85.63 * scalingFactor, 10.68 * scalingFactor);
+  curveVertex(78.82 * scalingFactor, 10.11 * scalingFactor);
+  curveVertex(73.74 * scalingFactor, 10.11 * scalingFactor);
+  curveVertex(71.78 * scalingFactor, 8.29 * scalingFactor);
+  curveVertex(70.07 * scalingFactor, 6.39 * scalingFactor);
+  curveVertex(68.19 * scalingFactor, 6.39 * scalingFactor);
+  curveVertex(66.2 * scalingFactor, 6.39 * scalingFactor);
+  curveVertex(64.42 * scalingFactor, 6.4 * scalingFactor);
+  curveVertex(62.7 * scalingFactor, 6.5 * scalingFactor);
+  curveVertex(61.36 * scalingFactor, 5.68 * scalingFactor);
+  curveVertex(61.09 * scalingFactor, 3.98 * scalingFactor);
+  curveVertex(59.13 * scalingFactor, 2.1 * scalingFactor);
+  curveVertex(57.14 * scalingFactor, 2.1 * scalingFactor);
+  curveVertex(54.87 * scalingFactor, 2.1 * scalingFactor);
+  curveVertex(52.9 * scalingFactor, 2.1 * scalingFactor);
+  curveVertex(49.26 * scalingFactor, 2.18 * scalingFactor);
+  curveVertex(27.61 * scalingFactor, 2.26 * scalingFactor);
+  curveVertex(27.57 * scalingFactor, 0.26 * scalingFactor);
+  curveVertex(27.57 * scalingFactor, 0 * scalingFactor);
+  curveVertex(25.46 * scalingFactor, 0 * scalingFactor);
+  curveVertex(0, 9.34 * scalingFactor);
+  curveVertex(0, 20.31 * scalingFactor);
+  curveVertex(4.39 * scalingFactor, 20.31 * scalingFactor);
+  curveVertex(4.39 * scalingFactor, 26.73 * scalingFactor);
+  curveVertex(106.68 * scalingFactor, 26.73 * scalingFactor);
+  curveVertex(120.39 * scalingFactor, 24.6 * scalingFactor);
+  curveVertex(105.08 * scalingFactor, 18.28 * scalingFactor);
   curveVertex(106.06 * scalingFactor, 18.28 * scalingFactor);
 
   endShape(CLOSE);
