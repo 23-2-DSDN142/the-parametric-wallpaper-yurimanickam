@@ -30,6 +30,7 @@ platform();
 beamTop();
 carBody();
 wheelMethod();
+CarTwo();
 }
 
 
@@ -126,7 +127,7 @@ function carBody(){
   let scalingFactor = 1.20;
   let shapeX = 100; // Initial X position of the shape
   let shapeY = 100; // Initial Y position of the shape
-
+  Push(); // Save the current transformation state
    // Save the current transformation state
   translate(shapeX, shapeY); // Move the shape based on shapeX and shapeY
   fill("#D67070");
@@ -168,110 +169,42 @@ function carBody(){
   pop();
 }
 
+function CarTwo(){
+push(); // Save the current transformation state
+   // Save the current transformation state
+  translate(100, 1); // Move the shape based on shapeX and shapeY
+  fill("#D67070");
+  stroke("#D67070");
+  scale(1,1);
+stroke('rgba(0,0,0,0)')
+strokeCap(PROJECT);
+strokeJoin(MITER);
+fill("#ca291c")
+globalAlpha = 0.49;
+beginShape();
+vertex(112.86,28.37);
+vertex(89.57,17.560000000000002);
+bezierVertex(87.00999999999999,16.480000000000004,84.33999999999999,15.940000000000001,81.66,15.940000000000001);
+vertex(68.44,15.940000000000001);
+vertex(66.35,13.860000000000001);
+bezierVertex(64.19999999999999,11.71,61.599999999999994,10.560000000000002,58.92999999999999,10.560000000000002);
+vertex(49.82999999999999,10.560000000000002);
+vertex(49.82999999999999,0);
+vertex(40.03999999999999,0);
+bezierVertex(33.15999999999999,0,26.349999999999994,1.99,20.07999999999999,5.84);
+vertex(0,18.18);
+vertex(0,30.689999999999998);
+vertex(4.67,30.689999999999998);
+vertex(4.67,38.01);
+vertex(113.52,38.01);
+vertex(128.10999999999999,35.58);
+vertex(112.85999999999999,28.369999999999997);
+endShape();
 
-
-function wheelMethod(){
-let numSpokes = 40; 
-let spokeLength = 100; 
-let spokeWidth = 60; 
-let startColor, endColor; 
-
-startColor = color("#805757");
-endColor = color("#395239"); 
-let centerX = width / 2;
-let centerY = height / 2;
-
-let angleStep = TWO_PI / numSpokes;
-
-for (let i = 0; i < numSpokes; i++) {
-  let angle = i * angleStep;
-  let x1 = centerX;
-  let y1 = centerY;
-  let x2 = centerX + cos(angle) * spokeLength;
-  let y2 = centerY + sin(angle) * spokeLength;
-
-  // Calculate the control points for the Bezier curve
-  let cx1 = x1 + cos(angle - HALF_PI) * spokeWidth;
-  let cy1 = y1 + sin(angle - HALF_PI) * spokeWidth;
-  let cx2 = x2 + cos(angle + HALF_PI) * spokeWidth;
-  let cy2 = y2 + sin(angle + HALF_PI) * spokeWidth;
-
-  // Calculate the color for the current spoke based on its position in the loop
-  let interpValue = i / (numSpokes - 1);
-  let currentColor = lerpColors(startColor, endColor, interpValue);
-
-  // Draw the Bezier curve with the interpolated color
-  noFill();
-  stroke(currentColor);
-  strokeWeight(2);
-  bezier(x1, y1, cx1, cy1, cx2, cy2, x2, y2);
-}
+  pop();
 }
 
-function lerpColors(startColor, endColor, amount) {
-  let startHSL = rgbToHsl(red(startColor), green(startColor), blue(startColor));
-  let endHSL = rgbToHsl(red(endColor), green(endColor), blue(endColor));
 
-  let lerpedHSL = [
-    lerp(startHSL[0], endHSL[0], amount),
-    lerp(startHSL[1], endHSL[1], amount),
-    lerp(startHSL[2], endHSL[2], amount)
-  ];
 
-  return color(hslToRgb(...lerpedHSL));
-}
-
-// Helper function to convert RGB to HSL color space
-function rgbToHsl(r, g, b) {
-  r /= 255;
-  g /= 255;
-  b /= 255;
-
-  let max = Math.max(r, g, b), min = Math.min(r, g, b);
-  let h, s, l = (max + min) / 2;
-
-  if (max == min) {
-    h = s = 0;
-  } else {
-    let d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-    switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
-    }
-
-    h /= 6;
-  }
-
-  return [h, s, l];
-}
-
-// Helper function to convert HSL to RGB color space
-function hslToRgb(h, s, l) {
-  let r, g, b;
-
-  if (s == 0) {
-    r = g = b = l;
-  } else {
-    function hue2rgb(p, q, t) {
-      if (t < 0) t += 1;
-      if (t > 1) t -= 1;
-      if (t < 1 / 6) return p + (q - p) * 6 * t;
-      if (t < 1 / 2) return q;
-      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-      return p;
-    }
-
-    let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    let p = 2 * l - q;
-    r = hue2rgb(p, q, h + 1 / 3);
-    g = hue2rgb(p, q, h);
-    b = hue2rgb(p, q, h - 1 / 3);
-  }
-
-  return color(r * 255, g * 255, b * 255);
-}
 
 
