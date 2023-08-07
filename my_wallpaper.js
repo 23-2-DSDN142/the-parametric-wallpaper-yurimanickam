@@ -12,7 +12,12 @@ let beamOffset = 40;
 let beamWidth = 12;
 
 
+let moveCarX = 0;
+let moveCarY = 0;
+let scaleCarX = 0;
+let scaleCarY = 0;
 
+let wingPitch = 0;
 
 
 //Global Variables
@@ -32,7 +37,7 @@ function setup_wallpaper(pWallpaper) {
 }
 
 function wallpaper_background() {
-  background("#9bd6fd");
+  background("#8ca1af");
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
@@ -50,6 +55,8 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     //pop(); // Restore the original transformation state
   //}
   carFloor(pHeight);
+  spoiler(pHeight);
+  carShades(pHeight)
 
 }
 
@@ -112,8 +119,8 @@ function beamTop(pHeight) {
 
 function carBody(pHeight){
 push();
-  translate(20, -46.5 + pHeight);
-  scale(carScaleConst,carScaleConst);
+  translate(20 + moveCarX, -46.5 + pHeight + moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
   //translate the elements all at once, or individually?
   fill("#0f0d0d");
   fill("#ca291c")
@@ -141,8 +148,8 @@ pop();
 
 function carFloor(pHeight) {
   push();
-  translate(21, 121);
-  scale(1.2, 1.2);
+  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
 
   //wing left
   fill("#647b81");
@@ -190,8 +197,112 @@ function carFloor(pHeight) {
   vertex(72.09, 15.14);
   endShape();
   pop();
+
+  //lil wingtip tpye of thing.
+  fill("#30363686");
+  push();
+  translate(150.3 + moveCarX, pHeight - 12.55 + moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+  beginShape();
+  vertex(19.31,7.21);
+  vertex(4.05,0);
+  bezierVertex(1.77,2.27,0.15,5.44,0,9.64);
+  vertex(4.72,9.64);
+  vertex(19.31,7.21);
+  endShape();
+  pop();
 }
 
 
 
+function americasTestCar(pHeight) {
+  push();
+  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+
+  pop();
+}
+
+function spoiler(pHeight) {
+  push();
+  fill("#af1a1a")
+  //front spoiler parts
+  translate(155 + moveCarX, pHeight - 7 + moveCarY);
+  rotate(wingPitch);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+  beginShape();
+  vertex(22.02,4.8);
+  vertex(22.02,2.69);
+  bezierVertex(22.02,1.2,21.13,-0.01,20.04,-0.01);
+  vertex(1.09,-0.01);
+  bezierVertex(0.22,0,0.3,1.54,0,2.66);
+  vertex(2.35,5.48);
+  bezierVertex(6.27,7.4,17.83,5.29,22.02,4.81);
+  endShape();
+  pop();
+
+  //HIghlight
+  push();
+  fill("#cc7511")
+
+  translate(157.5 + moveCarX, pHeight - 5.5 + moveCarY);
+  rotate(wingPitch);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+  beginShape();
+  vertex(19.67,3.32);
+  bezierVertex(19.67,3.32,4.4,6.05,0,3.99);
+  bezierVertex(0,3.99,18.6,-4.53,19.67,3.32);
+  endShape()
+  pop();
+}
+
+
+function carShades() {
+  push();
+  translate(25.5 + moveCarX, pHeight - 42 + moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+  
+  beginShape();
+  vertex(0, 34.18);
+  vertex(0, 34.32);
+  vertex(68.44, 34.32);
+  bezierVertex(48.05, 17.56, 20.24, 16.69, 0, 34.18);
+  endShape();
+  
+  fill("#72291c");
+  beginShape();
+  vertex(63.83, 12.27);
+  vertex(33.47, 12.27);
+  bezierVertex(33.05, 12.27, 33.00, 13.12, 33.43, 13.19);
+  vertex(59.17, 17.84);
+  bezierVertex(61.64, 18.29, 63.84, 15.67, 63.84, 12.27);
+  vertex(63.84, 12.27);
+  endShape();
+  
+  fill("#72291c");
+  beginShape();
+  vertex(45.17, 6.87);
+  vertex(19.03, 6.87);
+  bezierVertex(18.43, 6.87, 18.27, 5.75, 18.82, 5.44);
+  vertex(19.38, 5.12);
+  bezierVertex(25.31, 1.74, 31.69, 0.00, 38.13, 0.00);
+  vertex(45.16, 0.00);
+  vertex(45.16, 6.87);
+  endShape();
+  
+  fill("#72291c");
+  beginShape();
+  vertex(72.90, 12.27);
+  vertex(70.98, 9.80);
+  bezierVertex(69.86, 8.36, 68.39, 7.56, 66.85, 7.56);
+  vertex(66.05, 7.56);
+  bezierVertex(65.47, 7.56, 65.01, 8.20, 65.01, 8.98);
+  vertex(65.01, 8.98);
+  bezierVertex(65.01, 9.76, 65.48, 10.40, 66.05, 10.40);
+  vertex(68.72, 10.40);
+  vertex(70.14, 12.27);
+  vertex(72.90, 12.27);
+  endShape();
+  pop();
+}
 
