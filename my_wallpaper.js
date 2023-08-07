@@ -1,8 +1,6 @@
-//my variables
-let x = 100;//global x
-
+//my parameters
 let randomHeight = false; // make the heights of the platforms have variability
-let heightRandomness = 1; //variability of tha random height
+let heightRandomness = 0.5; //variability of tha random height
 let platformHeight = 50;//adjust the height the platform spawns at.
 let platformThickness = 15;
 let platformDepth = 20;//how tall the ellipse is in relation to its width, adjusting depth
@@ -13,7 +11,7 @@ let beamWidth = 12;
 
 let mood = "mix"; //muted, pastel, mix
 let carVariation = 0.5;//variation between colours
-let randomCar = false;//random distrobution of cars
+let randomCar = true;//random distrobution of cars
 
 let moveCarX = 0;
 let moveCarY = 0;
@@ -32,10 +30,16 @@ let clouds = true;
 let cloudDensity = 0.7;
 let cloudParticleSize = 1;
 
+
+
+
+
+
+
 //Global Variables
 let pHeight = 200 - platformHeight;
 let carScaleConst = 1.05;
-
+let x = 100;//global x
 
 //used www,realtimecolors.com to get good accent tones ect
 let redPal = ["#9b2e2e", "#973e0a", "#30383a", "#3b4d4f", "#280B0B", "#414849", "#3b4d4f", "#280B0B",
@@ -76,7 +80,7 @@ function setup_wallpaper(pWallpaper) {
 }
 
 function wallpaper_background() {
-  background("#98b5c0");
+  background("#a2cbda");
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
