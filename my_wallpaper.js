@@ -55,6 +55,7 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     //pop(); // Restore the original transformation state
   //}
   tires(randHi);
+  wheel();
 
 }
 
@@ -358,5 +359,47 @@ function tires(pHeight) {
   translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
 
+  pop();
+}
+function wheel() {
+  push();
+  angleMode(RADIANS);
+  let numSpokes = 40;
+  let spokeLength = 10;
+  let spokeWidth = 20;
+  let circleRadius = 2;
+  let gradientIntensity = 3;
+
+  let centerX = 0; // Use your desired x value
+  let centerY = 0; // Use your desired y value
+
+  let angleStep = TWO_PI / numSpokes;
+
+  for (let i = 0; i < numSpokes; i++) {
+    let angle = i * angleStep;
+
+    let innerX = centerX + cos(angle) * circleRadius;
+    let innerY = centerY + sin(angle) * circleRadius;
+    let outerX = centerX + cos(angle) * (circleRadius + spokeLength);
+    let outerY = centerY + sin(angle) * (circleRadius + spokeLength);
+
+    let cx1 = innerX + cos(angle - HALF_PI) * spokeWidth;
+    let cy1 = innerY + sin(angle - HALF_PI) * spokeWidth;
+    let cx2 = outerX + cos(angle + HALF_PI) * spokeWidth;
+    let cy2 = outerY + sin(angle + HALF_PI) * spokeWidth;
+
+    // Draw the gradiented spoke
+
+    noFill();
+    for (let t = 0; t <= 1; t += 0.01) {
+      let w = bezierPoint(innerX, cx1, cx2, outerX, t);
+      let e = bezierPoint(innerY, cy1, cy2, outerY, t);
+
+      let gradientColor = lerpColor(color("#a9f5d2"), color("#86cea4"), t * gradientIntensity);
+      stroke(gradientColor);
+      strokeWeight(0.5);
+      point(w, e);
+    } 
+  }
   pop();
 }
