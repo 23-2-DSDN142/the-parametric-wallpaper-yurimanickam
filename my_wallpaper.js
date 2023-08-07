@@ -68,18 +68,18 @@ let bluePastelPal = ["#66b2de", "#4E6A80", "#B5CCD2", "#899DA2", "#4E7CA6", "#6E
 let activeCol = [];
 //clouds array
 let cloud = [];
-
+let shadow = false;
 
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(FIT_TO_SCREEN);
-  pWallpaper.show_guide(true); //set this to false when you're ready to print
+  pWallpaper.resolution(NINE_LANDSCAPE);
+  pWallpaper.show_guide(false); //set this to false when you're ready to print
 
   //Grid settings
-  pWallpaper.grid_settings.cell_width  = 200;
+  pWallpaper.grid_settings.cell_width  = 200; //use 214.14 for A3, 200 for ninewp
   pWallpaper.grid_settings.cell_height = 200;
-  pWallpaper.grid_settings.row_offset  = 100;
+  pWallpaper.grid_settings.row_offset  = 100;//0 for A3, 100 for ninewp
 
 }
 
@@ -137,7 +137,7 @@ function symbols() {
 
   //structures, unhindered 
   beamBottom(randHi);
-  platform(randHi);
+  platform(randHi, shadow);
   beamTop(randHi);
 
   //couldve used elif but this just split things a bit better mentally
@@ -147,15 +147,19 @@ function symbols() {
     carBody(activeCol);
     drawTires(randHi);
     frontWing(randHi, activeCol);
+    shadow = true;
     pop();
+  }else{
+    shadow = false;
   }
-
+ 
 
   if (randomCar  == false)  {
   rearWing(activeCol)
   carBody(activeCol);
   drawTires(randHi);
   frontWing(randHi, activeCol);
+  shadow = true;
   }
 }
 function drawTires(randHi) {
@@ -163,7 +167,6 @@ function drawTires(randHi) {
   wheel(randHi, 51, -9);
   wheel(randHi, 134, -9);
 }
-
 
 //these are inspired, but not derivative from https://openprocessing.org/sketch/1829701
 //its a bit janky but it works for the purpose and is simple enough to follow
@@ -226,7 +229,7 @@ function beamBottom(pHeight){
 }
 }
 
-function platform(pHeight) {
+function platform(pHeight, shadow) {
   noStroke();
   for (let i = 0; i < platformThickness; i++) {
       //stacking, creating the same texture as before
@@ -239,9 +242,11 @@ function platform(pHeight) {
   }
   fill("#867a7a");
   ellipse(x , pHeight, 180, 180/platformDepth);
+  if (shadow == true) {
   fill("#1a171779");
   ellipse(x , pHeight, 150 * scaleCarX, 140 * scaleCarY/platformDepth);
   //upper platform stays a uniform colour throughout iterations, althought this is an easy enough change if needed
+  }
 }
 
 function beamTop(pHeight) {
