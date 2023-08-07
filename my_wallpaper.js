@@ -1,40 +1,76 @@
 //this program makes extensive use of randomised modifiers, so not every set of settings will recreate the exact same result.
-//however, there are more than enough parameters that do not rely on randomisation to make determenistic wallpapers when needed. 
+//however, there are more than enough parameters that do not rely on randomisation to make determenistic wallpapers when needed.
+
 
 //my parameters
 let randomHeight = false; // make the heights of the platforms have variability
-let heightRandomness = 0.5; //variability of tha random height
-let platformHeight = 50; //adjust the height the platform spawns at.
-let platformThickness = 15;
-let platformDepth = 20; //how tall the ellipse is in relation to its width, adjusting depth
+let heightRandomness = 1.5; //variability of tha random height
+let platformHeight = 125; //adjust the height the platform spawns at.
+let platformThickness = 11;
+let platformDepth = 30; //how tall the ellipse is in relation to its width, adjusting depth
+
 
 let beamOffset = 40;
-let beamWidth = 12;
+let beamWidth = 10;
 //structure variables, 40 on beamOffset makes the beams line up.
 
+
 let mood = "mix"; //muted, pastel, mix
-let carVariation = 0.5; //variation between colours
-let randomCar = false; //random distrobution of cars
+let carVariation = 0.6; //variation between colours
+let randomCar = true; //random distrobution of cars
+let carDistro = 0.7; //how many cars spawn when random
+
 
 let moveCarX = 0;
 let moveCarY = 0;
 let scaleCarX = 1;
 let scaleCarY = 1;
 
+
 //wheel alterations
-let wheelWidth = 23;
-let rimSize = 0.7;
+let wheelWidth = 22;
+let rimSize = 0.5;
 let suspensionHeight = 0;
 let tiresX = 0;
-let spokeWidth = 10;
+let spokeWidth = 0;
+let spokeStroke = 0.2;
+
 
 //clouds
 //warning, as higher clouddensity increasing calculation time, and may crash if too high.
 let clouds = true;
-let cloudDensity = 0.7;
-let cloudParticleSize = 1;
+let cloudDensity = 2;
+let cloudParticleSize = 0.4;
 
 
+let globalX = 1;
+let globalY = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+function setup_wallpaper(pWallpaper) {
+  pWallpaper.output_mode(GLIDE_WALLPAPER);
+  pWallpaper.resolution(NINE_LANDSCAPE);
+  pWallpaper.show_guide(false); //set this to false when you're ready to print
+
+
+  //Grid settings
+  pWallpaper.grid_settings.cell_width = 200; //use 214.14 for A3, 200 for ninewp
+  pWallpaper.grid_settings.cell_height = 200;
+  pWallpaper.grid_settings.row_offset = 100; //0 for A3, 100 for ninewp
+
+
+}
 
 
 
@@ -45,6 +81,7 @@ let pHeight = 200 - platformHeight;
 let carScaleConst = 1.05;
 let x = 100; //global x
 
+
 //used www,realtimecolors.com to get good accent tones ect
 let redPal = ["#9b2e2e", "#973e0a", "#30383a", "#3b4d4f", "#280B0B", "#414849", "#3b4d4f", "#280B0B",
   "#280B0B", "#d19825", "#280B0B", "#3b4d4f", "#b6831e", "#181717", "#4c566b", "#262726",
@@ -52,16 +89,20 @@ let redPal = ["#9b2e2e", "#973e0a", "#30383a", "#3b4d4f", "#280B0B", "#414849", 
 ];
 //colours for the cars, in arrays for customisability and abberation
 
+
 let bluePal = ["#3c81b9", "#393040", "#aa521e", "#333438", "#1e4d68", "#47525c", "#233747", "#393040",
   "#393040", "#14394b", "#393040", "#2f3741", "#266d8b", "#171718", "#6b564c", "#262726",
   "#777975", "#3c81b9", "#322f38", "#393040", "#0d3041", "#3c81b9", "#1c3770"
 ];
 
 
+
+
 let redPastelPal = ["#FF6B6B", "#FF9E7C", "#98C9A3", "#738A94", "#E99497", "#A4BBC2", "#EAC5B5", "#A4BBC2",
   "#A4BBC2", "#F0D876", "#A4BBC2", "#738A94", "#D0B04A", "#44403F", "#6B7C8A", "#564B57",
   "#7B8D8D", "#FF6B6B", "#98C9A3", "#A4BBC2", "#D0B04A", "#FF6B6B", "#D29D49"
 ];
+
 
 let bluePastelPal = ["#66b2de", "#4E6A80", "#B5CCD2", "#899DA2", "#4E7CA6", "#6E8490", "#4A6B87", "#4E6A80",
   "#4E6A80", "#8FB5C7", "#4E6A80", "#899DA2", "#A89F3D", "#393937", "#56646E", "#403F45",
@@ -75,35 +116,23 @@ let cloud = [];
 let shadow = false;
 
 
-function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(NINE_LANDSCAPE);
-  pWallpaper.show_guide(false); //set this to false when you're ready to print
 
-  //Grid settings
-  pWallpaper.grid_settings.cell_width = 200; //use 214.14 for A3, 200 for ninewp
-  pWallpaper.grid_settings.cell_height = 200;
-  pWallpaper.grid_settings.row_offset = 100; //0 for A3, 100 for ninewp
-
-}
 
 function wallpaper_background() {
-  background("#a2cbda");
+  background("#aed0dd");
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
   //transforming everything at once for ease of use
   push();
   translate(0, 0);
-  scale(1, 1);
+  scale(globalX, globalY);
   symbols();
   pop();
 }
 
-
 function symbols() {
   //randHi is used around this, it is simply another variable for a random Height.
-
   //the weighting between the colour combos
   if (random(0, 1) < carVariation && mood == "muted") {
     activeCol = redPal;
@@ -139,13 +168,13 @@ function symbols() {
     pop();
   }
 
-  //structures, unhindered 
+  //structures, unhindered
   beamBottom(randHi);
   platform(randHi, shadow);
   beamTop(randHi);
 
   //couldve used elif but this just split things a bit better mentally
-  if (random(0, 1) < 0.5 && randomCar == true) {
+  if (random(0, 1) < carDistro && randomCar == true) {
     push();
     rearWing(activeCol)
     carBody(activeCol);
@@ -157,7 +186,6 @@ function symbols() {
     shadow = false;
   }
 
-
   if (randomCar == false) {
     rearWing(activeCol)
     carBody(activeCol);
@@ -166,7 +194,6 @@ function symbols() {
     shadow = true;
   }
 }
-
 function drawTires(randHi) {
   tires(randHi);
   wheel(randHi, 51, -9);
@@ -233,16 +260,14 @@ function drawCloud() {
 function beamBottom(pHeight) {
   noStroke();
   fill("#e24646");
-
   let beamCenterXLeft = x - 10 - beamOffset;
   let beamCenterXRight = x + 10 + beamOffset;
   let beamHeight = (200 - pHeight) * 5;
 
-
   for (let i = 0; i < beamHeight; i++) {
     let yPos = 200 + 0.2 * -i;
     //shades of grey
-    let shade = random(60, 90);
+    let shade = random(60, 80);
     fill(shade);
     //draw shapes
     ellipse(beamCenterXRight, yPos, beamWidth, beamWidth / platformDepth);
@@ -252,13 +277,13 @@ function beamBottom(pHeight) {
 
 function platform(pHeight, shadow) {
   noStroke();
-  for (let i = 0; i < platformThickness; i++) {
+  let repet = platformThickness * 5
+  for (let i = 0; i < repet; i++) {
     //stacking, creating the same texture as before
-    let yPos = pHeight + platformThickness + 1 * -i;
-
+    let yPos = pHeight + platformThickness + 0.2 * -i;
     let shade = random(60, 100);
     //adding a blue tinge to the platform?
-    fill(shade, 100, 100, 180);
+    fill(shade);
     ellipse(x, yPos, 180, 180 / platformDepth);
   }
   fill("#867a7a");
@@ -273,12 +298,10 @@ function beamTop(pHeight) {
   fill("#000000");
   let beamCenterXLeft = x - 10 - beamOffset;
   let beamCenterXRight = x + 10 + beamOffset;
-  let beamHeight = 2 + pHeight * 5;
-
-
+  let beamHeight = 2 + pHeight * 10;
   for (let i = 0; i < beamHeight; i++) {
-    let yPos = pHeight + 0.2 * -i;
-    let shade = random(60, 90);
+    let yPos = pHeight + 0.1 * -i;
+    let shade = random(60, 70);
     fill(shade);
     ellipse(beamCenterXRight, yPos, beamWidth, beamWidth / platformDepth);
     ellipse(beamCenterXLeft, yPos, beamWidth, beamWidth / platformDepth);
@@ -290,7 +313,6 @@ function carBody(activeCol) {
   translate(16 + moveCarX, pHeight - 47 - moveCarY);
   scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
   //global translators
-
 
   //Main Body Part
   //coordinates copied and refactored off svg files
@@ -428,7 +450,6 @@ function carBody(activeCol) {
   vertex(93.82, 21.24);
   endShape();
 
-
   //SharkFin
   fill(activeCol[11]);
   beginShape();
@@ -438,6 +459,7 @@ function carBody(activeCol) {
   vertex(67.26, 43.29);
   vertex(89.34, 43.29);
   endShape();
+
 
   //BodyVent1
   fill(activeCol[12]);
@@ -450,10 +472,8 @@ function carBody(activeCol) {
   bezierVertex(42.8, 20.34, 42.1, 19.63, 42.1, 18.77);
   vertex(42.1, 15.81);
   endShape();
-
   pop();
 }
-
 
 function tires(pHeight) {
   push();
@@ -461,12 +481,12 @@ function tires(pHeight) {
   scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
   //draw the tires and the inner rim
   fill("#181717");
-  ellipse(51 + tiresX, -9, wheelWidth);
-  ellipse(134 + tiresX, -9, wheelWidth);
+  ellipse(51 + tiresX, -9 - suspensionHeight, wheelWidth);
+  ellipse(134 + tiresX, -9 - suspensionHeight, wheelWidth);
 
   fill("#4c566b");
-  ellipse(51 + tiresX, -9, wheelWidth * rimSize);
-  ellipse(134 + tiresX, -9, wheelWidth * rimSize);
+  ellipse(51 + tiresX, -9 - suspensionHeight, wheelWidth * rimSize);
+  ellipse(134 + tiresX, -9 - suspensionHeight, wheelWidth * rimSize);
   pop();
 }
 
@@ -480,36 +500,31 @@ function wheel(pHeight, wheelX, wheelY) {
   let numSpokes = 30;
   let spokeLength = 8 * rimSize;
   let circleRadius = 2;
-  let gradientIntensity = 3;
+  let gradientIntensity = 0.7;
 
   let centerX = wheelX + tiresX;
-  let centerY = wheelY;
-
+  let centerY = wheelY - suspensionHeight;
   let angleStep = TWO_PI / numSpokes;
-
   for (let i = 0; i < numSpokes; i++) {
     let angle = i * angleStep;
-
     let innerX = centerX + cos(angle) * circleRadius;
     let innerY = centerY + sin(angle) * circleRadius;
     let outerX = centerX + cos(angle) * (circleRadius + spokeLength);
     let outerY = centerY + sin(angle) * (circleRadius + spokeLength);
-
     let cx1 = innerX + cos(angle - HALF_PI) * spokeWidth;
     let cy1 = innerY + sin(angle - HALF_PI) * spokeWidth;
     let cx2 = outerX + cos(angle + HALF_PI) * spokeWidth;
     let cy2 = outerY + sin(angle + HALF_PI) * spokeWidth;
     //calcualte the control points of the spokes, going in a circle
     // Draw the gradiented spoke
-
     noFill();
     for (let t = 0; t <= 1; t += 0.01) {
       let w = bezierPoint(innerX, cx1, cx2, outerX, t);
       let e = bezierPoint(innerY, cy1, cy2, outerY, t);
       //fillSpokes, plus gradient towards the outer edges which ended up not being utilised
-      let gradientColor = lerpColor(color("#262726"), color("#757977"), t * gradientIntensity);
+      let gradientColor = lerpColor(color("#928682"), color("#2a2b2e"), t * gradientIntensity);
       stroke(gradientColor);
-      strokeWeight(0.1);
+      strokeWeight(spokeStroke);
       point(w, e);
     }
   }
@@ -592,7 +607,6 @@ function frontWing(pHeight, activeCol) {
   bezierVertex(140.04, 46.25, 151.6, 44.14, 155.79, 43.66);
   endShape();
 
-
   //FrontWing Bottom
   fill(activeCol[22]);
   beginShape();
@@ -600,6 +614,5 @@ function frontWing(pHeight, activeCol) {
   bezierVertex(136.12, 44.33, 154.72, 35.81, 155.79, 43.66);
   bezierVertex(155.79, 43.66, 140.52, 46.39, 136.12, 44.33);
   endShape();
-
   pop();
 }
