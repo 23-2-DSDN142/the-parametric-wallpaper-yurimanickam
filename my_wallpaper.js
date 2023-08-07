@@ -30,7 +30,7 @@ let carScaleConst = 1.05;
 let cloud = [];
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER);
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
@@ -46,19 +46,19 @@ function wallpaper_background() {
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
+  
   if (randomHeight == true) {
     randHi = pHeight + random(-10 * heightRandomness, 10 * heightRandomness);
   } else {
     randHi = pHeight;
   }
 
-
-  let billy = random(0.5,1.1)
+  let cloudRand = random(1,1.5)
   let cloudPos = random(20, 180);
   let cloudPos2 = random(20, 180);
-    if (random() < 0.7) {
+    if (random() < 1) {
     push(); 
-    generateCloud(billy, cloudPos, cloudPos2);
+    generateCloud(cloudRand, cloudPos, cloudPos2);
     drawCloud();
     pop(); // Restore the original transformation state
   }
@@ -84,20 +84,21 @@ function drawTires(randHi) {
   wheel(randHi);
 }
 
-function generateCloud(billy, pos, sop) {
+function generateCloud(cloudRand, pos, sop) {
+  cloud = [];
   noStroke();
   let cloudX = pos;
   let cloudY = sop;
-  let cloudWidth = random(25*billy, 50*billy); // Adjust the width range as needed
-  let cloudHeight = random(5*billy, 15*billy); // Adjust the height range based on the width
-  let numEllipses = 200; // Adjust the number of ellipses
+  let cloudWidth = random(25*cloudRand, 50*cloudRand); // Adjust the width range as needed
+  let cloudHeight = random(10*cloudRand, 25*cloudRand); // Adjust the height range based on the width
+  let numEllipses = 500; // Adjust the number of ellipses
   let numBoundEllipses = 8; // Adjust the number of bound ellipses
-  let cloudShade = random(150, 255);
+  let cloudShade = random(150, 200);
   let cloudTransparency = random(0, 30);
   
   for (let i = 0; i < numBoundEllipses; i++) {
     let boundsWidth = cloudWidth * random(0.8, 1.2); // Width of the bounds ellipse
-    let boundsHeight = boundsWidth * random(0.6, 0.8); // Height of the bounds ellipse
+    let boundsHeight = boundsWidth * random(0.6, 0.8*cloudRand); // Height of the bounds ellipse
     let xOffset = random(-cloudWidth / 2, cloudWidth / 2);
     let yOffset = random(-cloudHeight / 2, cloudHeight / 2);
     let boundX = cloudX + xOffset;
