@@ -11,6 +11,7 @@ let beamOffset = 40;
 let beamWidth = 12;
 //structure variables, 40 on beamOffset makes the beams line up.
 
+let carColour = "red"; // mix, red, yellow, blue
 let randomCar = false;
 let moveCarX = 0;
 let moveCarY = 0;
@@ -34,6 +35,13 @@ let clouds = true;
 let cloud = [];
 let cloudDensity = 0.5;
 let cloudParticleSize = 0.5;
+
+let redCars = ["#ec3a2e", "#ca291c", "#647b81", "#3b4d4f", "#ca291c", "#647b81", "#3b4d4f", "#ca291c",
+               "#ca291c", "#fbb833", "#ca291c", "#3b4d4f", "#fbb833", "#181717", "#4c566b", "#262726",
+               "#757977", "#ec3a2e", "#647b81", "#ca291c", "#fbb833", "#ec3a2e", "#c6c62a" ];
+let blueCars = [];
+let yellowCars = [];
+let activeColour = [];
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(DEVELOP_GLYPH);
@@ -484,7 +492,7 @@ function rearWing(){
 function frontWing(pHeight){
   push();
   translate(16 + moveCarX, pHeight - 47 - moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+  scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
 
   //FrontWing Top
   fill("#ec3a2e");
