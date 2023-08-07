@@ -11,7 +11,7 @@ let beamOffset = 40;
 let beamWidth = 12;
 //structure variables, 40 on beamOffset makes the beams line up.
 
-let mood = "pastel"; //muted, pastel, mix
+let mood = "mix"; //muted, pastel, mix
 let carVariation = 0.5;//variation between colours
 let randomCar = false;//random distrobution of cars
 
@@ -64,7 +64,7 @@ let cloud = [];
 
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER);
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
@@ -93,6 +93,10 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     activeCol = redPastelPal;
   }else {
     activeCol = bluePastelPal;
+  }
+  if (mood == "mix") {
+    arrayMix = [redPal, bluePal, redPastelPal, bluePastelPal];
+    activeCol = random(arrayMix);
   }
 
 //randomHeight stuff
