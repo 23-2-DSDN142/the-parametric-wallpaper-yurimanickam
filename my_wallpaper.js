@@ -4,7 +4,7 @@ let x = 100;//global x and y
 
 let randomHeight = false // make the heights of the platforms have variability
 let heightRandomness = 1; //variability of tha random height
-let platformHeight = 60;//adjust the height the platform spawns at.
+let platformHeight = 100;//adjust the height the platform spawns at.
 let platformThickness = 20;
 let platformDepth = 15;//how tall the ellipse is in relation to its width, adjusting depth
 
@@ -54,9 +54,12 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     carBody(randHi);
     //pop(); // Restore the original transformation state
   //}
+  carShades(pHeight)
   carFloor(pHeight);
   spoiler(pHeight);
-  carShades(pHeight)
+  carHighlights(pHeight);
+  rearWing(pHeight);
+  
 
 }
 
@@ -123,7 +126,7 @@ push();
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
   //translate the elements all at once, or individually?
   fill("#0f0d0d");
-  fill("#ca291c")
+  fill("#ac3d29")
   beginShape();
   vertex(112.86,28.37);
   vertex(89.57,17.56);
@@ -258,10 +261,11 @@ function spoiler(pHeight) {
 
 
 function carShades() {
-  push();
+push();
   translate(25.5 + moveCarX, pHeight - 42 + moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-  
+
+  fill("#72291c");
   beginShape();
   vertex(0, 34.18);
   vertex(0, 34.32);
@@ -303,6 +307,34 @@ function carShades() {
   vertex(70.14, 12.27);
   vertex(72.90, 12.27);
   endShape();
-  pop();
+
+
+  fill("#fbb833")
+  rect(45,-3.9,2,10.8)
+  fill("#fbb833")
+  beginShape();
+  vertex(0,10.52);
+  vertex(4.88,10.52);
+  vertex(4.88,13.48);
+  bezierVertex(4.88,14.35,4.17,15.05,3.3099999999999996,15.05);
+  vertex(1.5699999999999996,15.05);
+  bezierVertex(0.71,15.06,0,14.35,0,13.48);
+  vertex(0,10.52);
+  endShape();
+pop();
 }
 
+function carHighlights(pHeight) {
+  push();
+  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+
+  pop();
+}
+function rearWing(pHeight) {
+  push();
+  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+
+  pop();
+}
