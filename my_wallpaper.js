@@ -14,11 +14,8 @@ let beamWidth = 12;
 let randomCar = false;
 let moveCarX = 0;
 let moveCarY = 0;
-let scaleCarX = 0;
-let scaleCarY = 0;
-
-
-
+let scaleCarX = 1;
+let scaleCarY = 1;
 
 let wheelWidth = 23;
 let rimSize = 0.7;
@@ -93,9 +90,6 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
 }
 
 
-//precursor statement for easier input interaction
-
-
 function drawTires(randHi) {
   tires(randHi);
   wheel(randHi, 51, -9);
@@ -107,10 +101,10 @@ function generateCloud(cloudRand, pos, sop) {
   noStroke();
   let cloudX = pos;
   let cloudY = sop;
-  let cloudWidth = random(25*cloudRand, 50*cloudRand); // Adjust the width range as needed
-  let cloudHeight = random(10*cloudRand, 25*cloudRand); // Adjust the height range based on the width
-  let numEllipses = 500 * cloudDensity; // Adjust the number of ellipses
-  let numBoundEllipses = 8; // Adjust the number of bound ellipses
+  let cloudWidth = random(25*cloudRand, 50*cloudRand); // Adjust width range
+  let cloudHeight = random(10*cloudRand, 25*cloudRand); // height range
+  let numEllipses = 500 * cloudDensity; // no of cloud particles
+  let numBoundEllipses = 8; // bound ellipses
   let cloudShade = random(150, 200);
   let cloudTransparency = random(0, 30);
   
@@ -130,9 +124,9 @@ function drawCloud() {
     let { x, y, cloudWidth, cloudHeight, numEllipses, cloudShade, cloudTransparency } = cloud[i];
     fill(cloudShade, cloudTransparency);
     for (let j = 0; j < numEllipses; j++) {
-      let angle = map(j, 0, numEllipses, 0, TWO_PI); // Spread the ellipses evenly around the center
-      let radiusX = random(cloudWidth / 2); // Keep the ellipses within half of the width
-      let radiusY = random(cloudHeight / 2); // Keep the ellipses within half of the height
+      let angle = map(j, 0, numEllipses, 0, TWO_PI); // spread around centre
+      let radiusX = random(cloudWidth / 2); //keep within bounds. half width, height
+      let radiusY = random(cloudHeight / 2);
       let ellipseX = x + radiusX * cos(angle);
       let ellipseY = y + radiusY * sin(angle);
       let ellipseSize = random(1, 15 * cloudParticleSize); // Adjust the size range of ellipses
@@ -175,7 +169,7 @@ function platform(pHeight) {
   fill("#867a7a");
   ellipse(x , pHeight, 180, 180/platformDepth);
   fill("#1a171779");
-  ellipse(x , pHeight, 150 * carScaleConst, 140 * carScaleConst/platformDepth);
+  ellipse(x , pHeight, 150 * scaleCarX, 140 * scaleCarY/platformDepth);
   //upper platform stays a uniform colour throughout iterations, althought this is an easy enough change if needed
 }
 
@@ -199,11 +193,12 @@ function beamTop(pHeight) {
 function carBody() {
   push();
   translate(16 + moveCarX, pHeight - 47 - moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-
+  scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
+  //global translators
 
   
   //Main Body Part
+  //coordinates copied and refactored off svg files
   fill("#ec3a2e");
   beginShape();
   vertex(129.1, 33.65);
@@ -368,30 +363,31 @@ function carBody() {
 function tires(pHeight) {
   push();
   translate(0 + moveCarX, pHeight - 0 + moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-
+  scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
+  //draw the tires and the inner rim
   fill("#181717");
-  ellipse(51, -9, wheelWidth);
-  ellipse(134, -9, wheelWidth);
+  ellipse(51 + tiresX, -9, wheelWidth);
+  ellipse(134 + tiresX, -9, wheelWidth);
 
   fill("#4c566b");
-  ellipse(51, -9, wheelWidth *  rimSize);
-  ellipse(134, -9, wheelWidth * rimSize);
+  ellipse(51 + tiresX, -9, wheelWidth *  rimSize);
+  ellipse(134 + tiresX, -9, wheelWidth * rimSize);
   pop();
 }
 
 function wheel(pHeight, wheelX, wheelY) {
+  //draw the beziercurved wheel(sadly detail is lost but still.)
   push();
   translate(0 + moveCarX, pHeight - 0 + moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-  angleMode(RADIANS);
+  scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
+  angleMode(RADIANS);//spent way too long on this
   let numSpokes = 30;
   let spokeLength = 8 * rimSize;
   let circleRadius = 2;
   let gradientIntensity = 3;
 
-  let centerX = wheelX; // Use your desired x value
-  let centerY = wheelY; // Use your desired y value
+  let centerX = wheelX + tiresX; 
+  let centerY = wheelY; 
 
   let angleStep = TWO_PI / numSpokes;
 
@@ -427,7 +423,7 @@ function wheel(pHeight, wheelX, wheelY) {
 function rearWing(){
   push();
   translate(16 + moveCarX, pHeight - 47 - moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+  scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
     //Wing Top Part
     fill("#ec3a2e");
     beginShape();
