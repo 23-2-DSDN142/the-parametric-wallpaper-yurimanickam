@@ -11,6 +11,7 @@ let beamOffset = 40;
 let beamWidth = 12;
 //structure variables, 40 on beamOffset makes the beams line up.
 
+let mood = "pastel"; //muted, pastel, mix
 let carVariation = 0.5;//variation between colours
 let randomCar = false;//random distrobution of cars
 
@@ -37,14 +38,24 @@ let carScaleConst = 1.05;
 
 
 //used www,realtimecolors.com to get good accent tones ect
-let redVariant = ["#9b2e2e", "#973e0a", "#647b81", "#3b4d4f", "#280B0B", "#647b81", "#3b4d4f", "#280B0B",
+let redPal = ["#9b2e2e", "#973e0a", "#30383a", "#3b4d4f", "#280B0B", "#414849", "#3b4d4f", "#280B0B",
 "#280B0B", "#d19825", "#280B0B", "#3b4d4f", "#b6831e", "#181717", "#4c566b", "#262726",
 "#757977", "#9b2e2e", "#647b81", "#280B0B", "#b6831d", "#9b2e2e", "#b38219"];
 //colours for the cars, in arrays for customisability and abberation
 
-let blueVariant = ["#3c81b9", "#393040", "#aa521e", "#4f4d3b", "#1e4d68", "#47525c", "#4f4d3b", "#393040",
-"#393040", "#14394b", "#393040", "#4d4f3b", "#266d8b", "#171718", "#6b564c", "#262726",
-"#777975", "#3c81b9", "#322f38", "#393040", "#0d3041", "#3c81b9", "#134955"];
+let bluePal = ["#3c81b9", "#393040", "#aa521e", "#333438", "#1e4d68", "#47525c", "#233747", "#393040",
+"#393040", "#14394b", "#393040", "#2f3741", "#266d8b", "#171718", "#6b564c", "#262726",
+"#777975", "#3c81b9", "#322f38", "#393040", "#0d3041", "#3c81b9", "#1c3770"];
+
+
+let redPastelPal = ["#FF6B6B", "#FF9E7C", "#98C9A3", "#738A94", "#E99497", "#A4BBC2", "#EAC5B5", "#A4BBC2",
+"#A4BBC2", "#F0D876", "#A4BBC2", "#738A94", "#D0B04A", "#44403F", "#6B7C8A", "#564B57",
+"#7B8D8D", "#FF6B6B", "#98C9A3", "#A4BBC2", "#D0B04A", "#FF6B6B", "#D29D49"];
+
+let bluePastelPal = ["#66b2de", "#4E6A80", "#B5CCD2", "#899DA2", "#4E7CA6", "#6E8490", "#4A6B87", "#4E6A80",
+"#4E6A80", "#8FB5C7", "#4E6A80", "#899DA2", "#A89F3D", "#393937", "#56646E", "#403F45",
+"#6C7878", "#66b2de", "#B5CCD2", "#4E6A80", "#A89F3C", "#66b2de", "#9B8E57"];
+
 
 let activeCol = [];
 //clouds array
@@ -53,7 +64,7 @@ let cloud = [];
 
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
+  pWallpaper.output_mode(DEVELOP_GLYPH);
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
@@ -71,11 +82,17 @@ function wallpaper_background() {
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
   //randHi is used around this, it is simply another variable for a random Height.
   
-  //the weighting between the two colour combos
-  if (random(0,1) < carVariation) {
-    activeCol = redVariant;
+  //the weighting between the colour combos
+  if (random(0,1) < carVariation && mood == "muted") {
+    activeCol = redPal;
   }else {
-    activeCol = blueVariant;
+    activeCol = bluePal;
+  }
+  
+  if (random(0,1) < carVariation && mood == "pastel") {
+    activeCol = redPastelPal;
+  }else {
+    activeCol = bluePastelPal;
   }
 
 //randomHeight stuff
