@@ -11,7 +11,7 @@ let beamOffset = 40;
 let beamWidth = 12;
 //structure variables, 40 on beamOffset makes the beams line up.
 
-let carColour = "red"; // mix, red, yellow, blue
+let carVariation = 0.5;
 let randomCar = false;
 let moveCarX = 0;
 let moveCarY = 0;
@@ -24,27 +24,30 @@ let suspensionHeight = 0;
 let tiresX = 0;
 let spokeWidth = 10;
 
-
+let clouds = true;
+let cloudDensity = 0.7;
+let cloudParticleSize = 1;
 
 //Global Variables
 let pHeight = 200 - platformHeight;
 let carScaleConst = 1.05;
 
-//clouds array
-let clouds = true;
-let cloud = [];
-let cloudDensity = 0.5;
-let cloudParticleSize = 0.5;
+let redVariant = ["#ec3a2e", "#ca291c", "#647b81", "#3b4d4f", "#ca291c", "#647b81", "#3b4d4f", "#ca291c",
+"#ca291c", "#fbb833", "#ca291c", "#3b4d4f", "#fbb833", "#181717", "#4c566b", "#262726",
+"#757977", "#ec3a2e", "#647b81", "#ca291c", "#fbb833", "#ec3a2e", "#e7c21d"];
 
-let redCars = ["#ec3a2e", "#ca291c", "#647b81", "#3b4d4f", "#ca291c", "#647b81", "#3b4d4f", "#ca291c",
-               "#ca291c", "#fbb833", "#ca291c", "#3b4d4f", "#fbb833", "#181717", "#4c566b", "#262726",
-               "#757977", "#ec3a2e", "#647b81", "#ca291c", "#fbb833", "#ec3a2e", "#c6c62a" ];
-let blueCars = [];
-let yellowCars = [];
-let activeColour = [];
+let blueVariant = ["#2e64ec", "#1c2cca", "#8164b8", "#4f4d3b", "#1c2cca", "#8164b8", "#4f4d3b", "#1c2cca",
+"#1c2cca", "#14394b", "#1c2cca", "#4d4f3b", "#113342", "#171718", "#6b564c", "#262726",
+"#777975", "#2e64ec", "#8164b8", "#1c2cca", "#0d3041", "#2e64ec", "#134955"];
+
+let activeCol = [];
+//clouds array
+let cloud = [];
+
+
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER);
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
@@ -61,6 +64,13 @@ function wallpaper_background() {
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
   
+  if (random(0,1) < carVariation) {
+    activeCol = redVariant;
+  }else {
+    activeCol = blueVariant;
+  }
+
+
   if (randomHeight == true) {
     randHi = pHeight + random(-10 * heightRandomness, 10 * heightRandomness);
   } else {
@@ -83,19 +93,19 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
 
   if (random(0,1) < 0.5 && randomCar == true) {
     push(); 
-    rearWing()
-    carBody(randHi);
+    rearWing(activeCol)
+    carBody(activeCol);
     drawTires(randHi);
-    frontWing(randHi);
+    frontWing(randHi, activeCol);
     pop();
-  }else {
-
   }
+
+
   if (randomCar  == false)  {
-  rearWing()
-  carBody(randHi);
+  rearWing(activeCol)
+  carBody(activeCol);
   drawTires(randHi);
-  frontWing(randHi);
+  frontWing(randHi, activeCol);
   }
 }
 
@@ -200,7 +210,7 @@ function beamTop(pHeight) {
 }
 }
 
-function carBody() {
+function carBody(activeCol) {
   push();
   translate(16 + moveCarX, pHeight - 47 - moveCarY);
   scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
@@ -209,7 +219,7 @@ function carBody() {
   
   //Main Body Part
   //coordinates copied and refactored off svg files
-  fill("#ec3a2e");
+  fill(activeCol[0]);
   beginShape();
   vertex(129.1, 33.65);
   vertex(105.81, 22.84);
@@ -230,7 +240,7 @@ function carBody() {
   endShape();
   
   //Front WingTip Overlay
-  fill("#ca291c");
+  fill(activeCol[1]);
   beginShape();
   vertex(144.35, 40.86);
   vertex(129.1, 33.65);
@@ -240,7 +250,7 @@ function carBody() {
   endShape();
   
   //Front WingTip Behind
-  fill("#647b81");
+  fill(activeCol[2]);
   beginShape();
   vertex(116.98, 34.97);
   vertex(116.98, 43.29);
@@ -250,7 +260,7 @@ function carBody() {
   endShape();
   
   //Front WingTip Front
-  fill("#3b4d4f");
+  fill(activeCol[3]);
   beginShape();
   vertex(137.08, 40.43);
   vertex(126.34, 37.51);
@@ -260,7 +270,7 @@ function carBody() {
   endShape();
   
   //Big Round Shading Bitte
-  fill("#ca291c");
+  fill(activeCol[4]);
   beginShape();
   vertex(20.91, 43.15);
   vertex(20.91, 43.29);
@@ -269,7 +279,7 @@ function carBody() {
   endShape();
   
   //Curvy Big Shading Bitte
-  fill("#647b81");
+  fill(activeCol[5]);
   beginShape();
   vertex(111.03, 32.83);
   vertex(100.2, 32.83);
@@ -285,7 +295,7 @@ function carBody() {
   endShape();
   
   //Air Intake
-  fill("#3b4d4f");
+  fill(activeCol[6]);
   beginShape();
   vertex(94.11, 28.92);
   bezierVertex(94.11, 26.31, 95.66, 24.2, 97.57, 24.2);
@@ -296,7 +306,7 @@ function carBody() {
   endShape();
   
   //Air Intake Behind
-  fill("#ca291c");
+  fill(activeCol[7]);
   beginShape();
   vertex(84.74, 21.24);
   vertex(54.38, 21.24);
@@ -307,7 +317,7 @@ function carBody() {
   endShape();
   
   //Engine Intake
-  fill("#ca291c");
+  fill(activeCol[8]);
   beginShape();
   vertex(66.08, 15.84);
   vertex(39.94, 15.84);
@@ -319,7 +329,7 @@ function carBody() {
   endShape();
 
   //Intake Cover
-  fill("#fbb833");
+  fill(activeCol[9]);
   beginShape();
   vertex(66.08, 5.29);
   vertex(67.32, 5.29);
@@ -329,7 +339,7 @@ function carBody() {
   endShape();
   
   //RV Mirror
-  fill("#ca291c");
+  fill(activeCol[10]);
   beginShape();
   vertex(93.82, 21.24);
   vertex(91.9, 18.77);
@@ -345,7 +355,7 @@ function carBody() {
   
   
   //SharkFin
-  fill("#3b4d4f");
+  fill(activeCol[11]);
   beginShape();
   vertex(89.35, 43.29);
   vertex(80.62, 38.88);
@@ -355,7 +365,7 @@ function carBody() {
   endShape();
   
   //BodyVent1
-  fill("#fbb833");
+  fill(activeCol[12]);
   beginShape();
   vertex(42.1, 15.81);
   vertex(46.98, 15.81);
@@ -430,12 +440,12 @@ function wheel(pHeight, wheelX, wheelY) {
   pop();
 }
 
-function rearWing(){
+function rearWing(activeCol){
   push();
   translate(16 + moveCarX, pHeight - 47 - moveCarY);
   scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
     //Wing Top Part
-    fill("#ec3a2e");
+    fill(activeCol[17]);
     beginShape();
     vertex(18.79, 0);
     vertex(1.23, 0);
@@ -452,7 +462,7 @@ function rearWing(){
     rect(10,20,20,15);
     
     //Wing Bottom Part
-    fill("#647b81");
+    fill(activeCol[18]);
     beginShape();
     vertex(0, 29.32);
     bezierVertex(0, 30.06, 0.35, 30.71, 0.87, 30.92);
@@ -464,7 +474,7 @@ function rearWing(){
     endShape();
 
      //WingStripe
-  fill("#ca291c");
+  fill(activeCol[19]);
   beginShape();
   vertex(0, 3.39);
   vertex(14.12, 3.39);
@@ -474,7 +484,7 @@ function rearWing(){
   endShape();
   
   //WingSticker
-  fill("#fbb833");
+  fill(activeCol[20]);
   beginShape();
   vertex(13.22, 3.39);
   vertex(16.52, 3.39);
@@ -489,13 +499,13 @@ function rearWing(){
   pop();
 }
 
-function frontWing(pHeight){
+function frontWing(pHeight, activeCol){
   push();
   translate(16 + moveCarX, pHeight - 47 - moveCarY);
   scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
 
   //FrontWing Top
-  fill("#ec3a2e");
+  fill(activeCol[21]);
   beginShape();
   vertex(155.79, 43.66);
   vertex(155.79, 41.55);
@@ -508,7 +518,7 @@ function frontWing(pHeight){
 
 
   //FrontWing Bottom
-  fill("#f0bc13");
+  fill(activeCol[22]);
   beginShape();
   vertex(136.12, 44.33);
   bezierVertex(136.12, 44.33, 154.72, 35.81, 155.79, 43.66);
