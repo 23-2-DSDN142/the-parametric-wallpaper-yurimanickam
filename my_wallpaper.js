@@ -455,6 +455,7 @@ function wheel(pHeight, wheelX, wheelY) {
   translate(0 + moveCarX, pHeight - 0 + moveCarY);
   scale(carScaleConst * scaleCarX, carScaleConst * scaleCarY);
   angleMode(RADIANS);//spent way too long on this
+
   let numSpokes = 30;
   let spokeLength = 8 * rimSize;
   let circleRadius = 2;
@@ -477,14 +478,14 @@ function wheel(pHeight, wheelX, wheelY) {
     let cy1 = innerY + sin(angle - HALF_PI) * spokeWidth;
     let cx2 = outerX + cos(angle + HALF_PI) * spokeWidth;
     let cy2 = outerY + sin(angle + HALF_PI) * spokeWidth;
-
+      //calcualte the control points of the spokes, going in a circle
     // Draw the gradiented spoke
 
     noFill();
     for (let t = 0; t <= 1; t += 0.01) {
       let w = bezierPoint(innerX, cx1, cx2, outerX, t);
       let e = bezierPoint(innerY, cy1, cy2, outerY, t);
-
+        //fillSpokes, plus gradient towards the outer edges which ended up not being utilised
       let gradientColor = lerpColor(color("#262726"), color("#757977"), t * gradientIntensity);
       stroke(gradientColor);
       strokeWeight(0.1);
