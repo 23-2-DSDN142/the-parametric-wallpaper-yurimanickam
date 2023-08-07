@@ -3,22 +3,21 @@ let x = 100;//global x
 
 let randomHeight = false // make the heights of the platforms have variability
 let heightRandomness = 1; //variability of tha random height
-let platformHeight = 100;//adjust the height the platform spawns at.
-let platformThickness = 20;
-let platformDepth = 15;//how tall the ellipse is in relation to its width, adjusting depth
+let platformHeight = 30;//adjust the height the platform spawns at.
+let platformThickness = 15;
+let platformDepth = 20;//how tall the ellipse is in relation to its width, adjusting depth
 
 let beamOffset = 40;
 let beamWidth = 12;
 //structure variables, 40 on beamOffset makes the beams line up.
 
-let randomCar = false;
+let randomCar = true;
 let moveCarX = 0;
 let moveCarY = 0;
 let scaleCarX = 0;
 let scaleCarY = 0;
 
-let wingPitch = 0;
-let spoilerPitch = 0;
+
 
 
 let wheelWidth = 23;
@@ -36,8 +35,8 @@ let cloudDensity = 0;
 let cloudParticleSize = 0;
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
-  pWallpaper.resolution(FIT_TO_SCREEN);
+  pWallpaper.output_mode(GRID_WALLPAPER);
+  pWallpaper.resolution(NINE_LANDSCAPE);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
   //Grid settings
@@ -66,24 +65,29 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     push(); 
     generateCloud(cloudRand, cloudPos, cloudPos2);
     drawCloud();
-    pop(); // Restore the original transformation state
+    pop();
   }
 
   beamBottom(randHi);
   platform(randHi);
   beamTop(randHi);
 
-  if (random() < 0.6 && randomCar == true) {
+  if (random(0,1) < 0.5 && randomCar == true) {
     push(); 
     rearWing()
     carBody(randHi);
-    pop(); // Restore the original transformation state
+    drawTires(randHi);
+    frontWing(randHi);
+    pop();
   }else {
-    rearWing()
-    carBody(randHi);
-  }
 
+  }
+  if (randomCar  == false)  {
+  rearWing()
+  carBody(randHi);
   drawTires(randHi);
+  frontWing(randHi);
+  }
 }
 
 
@@ -92,7 +96,8 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
 
 function drawTires(randHi) {
   tires(randHi);
-  wheel(randHi);
+  wheel(randHi, 51, -9);
+  wheel(randHi, 134, -9);
 }
 
 function generateCloud(cloudRand, pos, sop) {
@@ -331,17 +336,6 @@ function carBody() {
   vertex(93.82, 21.24);
   endShape();
   
-  //FrontWing Top
-  fill("#ec3a2e");
-  beginShape();
-  vertex(155.79, 43.66);
-  vertex(155.79, 41.55);
-  bezierVertex(155.79, 40.06, 154.9, 38.85, 153.81, 38.85);
-  vertex(134.86, 38.85);
-  bezierVertex(133.99, 38.85, 134.07, 40.39, 133.77, 41.51);
-  vertex(136.12, 44.33);
-  bezierVertex(140.04, 46.25, 151.6, 44.14, 155.79, 43.66);
-  endShape();
   
   //SharkFin
   fill("#3b4d4f");
@@ -365,14 +359,6 @@ function carBody() {
   vertex(42.1, 15.81);
   endShape();
   
-  //FrontWing Bottom
-  fill("#c6c62a");
-  beginShape();
-  vertex(136.12, 44.33);
-  bezierVertex(136.12, 44.33, 154.72, 35.81, 155.79, 43.66);
-  bezierVertex(155.79, 43.66, 140.52, 46.39, 136.12, 44.33);
-  endShape();
-
   pop();
 }
 
@@ -386,14 +372,13 @@ function tires(pHeight) {
   ellipse(51, -9, wheelWidth);
   ellipse(134, -9, wheelWidth);
 
-  fill("#fbb833");
+  fill("#4c566b");
   ellipse(51, -9, wheelWidth * rimSize);
   ellipse(134, -9, wheelWidth * rimSize);
   pop();
 }
 
-
-function wheel(pHeight) {
+function wheel(pHeight, wheelX, wheelY) {
   push();
   translate(0 + moveCarX, pHeight - 0 + moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
@@ -404,8 +389,8 @@ function wheel(pHeight) {
   let circleRadius = 2;
   let gradientIntensity = 3;
 
-  let centerX = 51; // Use your desired x value
-  let centerY = -9; // Use your desired y value
+  let centerX = wheelX; // Use your desired x value
+  let centerY = wheelY; // Use your desired y value
 
   let angleStep = TWO_PI / numSpokes;
 
@@ -437,7 +422,6 @@ function wheel(pHeight) {
   }
   pop();
 }
-
 
 function rearWing(){
   push();
@@ -498,5 +482,31 @@ function rearWing(){
   pop();
 }
 
-function frontWing(){
+function frontWing(pHeight){
+  push();
+  translate(16 + moveCarX, pHeight - 47 - moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+
+  //FrontWing Top
+  fill("#ec3a2e");
+  beginShape();
+  vertex(155.79, 43.66);
+  vertex(155.79, 41.55);
+  bezierVertex(155.79, 40.06, 154.9, 38.85, 153.81, 38.85);
+  vertex(134.86, 38.85);
+  bezierVertex(133.99, 38.85, 134.07, 40.39, 133.77, 41.51);
+  vertex(136.12, 44.33);
+  bezierVertex(140.04, 46.25, 151.6, 44.14, 155.79, 43.66);
+  endShape();
+
+
+  //FrontWing Bottom
+  fill("#c6c62a");
+  beginShape();
+  vertex(136.12, 44.33);
+  bezierVertex(136.12, 44.33, 154.72, 35.81, 155.79, 43.66);
+  bezierVertex(155.79, 43.66, 140.52, 46.39, 136.12, 44.33);
+  endShape();
+
+  pop();
 }
