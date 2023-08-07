@@ -1,7 +1,6 @@
 //this program makes extensive use of randomised modifiers, so not every set of settings will recreate the exact same result.
 //however, there are more than enough parameters that do not rely on randomisation to make determenistic wallpapers when needed.
 
-
 //my parameters
 let randomHeight = false; // make the heights of the platforms have variability
 let heightRandomness = 1.5; //variability of tha random height
@@ -9,23 +8,19 @@ let platformHeight = 125; //adjust the height the platform spawns at.
 let platformThickness = 11;
 let platformDepth = 30; //how tall the ellipse is in relation to its width, adjusting depth
 
-
 let beamOffset = 40;
 let beamWidth = 10;
 //structure variables, 40 on beamOffset makes the beams line up.
-
 
 let mood = "mix"; //muted, pastel, mix
 let carVariation = 0.6; //variation between colours
 let randomCar = true; //random distrobution of cars
 let carDistro = 0.7; //how many cars spawn when random
 
-
 let moveCarX = 0;
 let moveCarY = 0;
 let scaleCarX = 1;
 let scaleCarY = 1;
-
 
 //wheel alterations
 let wheelWidth = 22;
@@ -35,27 +30,14 @@ let tiresX = 0;
 let spokeWidth = 0;
 let spokeStroke = 0.2;
 
-
 //clouds
 //warning, as higher clouddensity increasing calculation time, and may crash if too high.
 let clouds = true;
 let cloudDensity = 2;
 let cloudParticleSize = 0.4;
 
-
 let globalX = 1;
 let globalY = 1;
-
-
-
-
-
-
-
-
-
-
-
 
 
 function setup_wallpaper(pWallpaper) {
@@ -68,13 +50,10 @@ function setup_wallpaper(pWallpaper) {
   pWallpaper.grid_settings.cell_width = 200; //use 214.14 for A3, 200 for ninewp
   pWallpaper.grid_settings.cell_height = 200;
   pWallpaper.grid_settings.row_offset = 100; //0 for A3, 100 for ninewp
-
-
 }
 
 
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Global Variables
 let pHeight = 200 - platformHeight;
@@ -89,13 +68,10 @@ let redPal = ["#9b2e2e", "#973e0a", "#30383a", "#3b4d4f", "#280B0B", "#414849", 
 ];
 //colours for the cars, in arrays for customisability and abberation
 
-
 let bluePal = ["#3c81b9", "#393040", "#aa521e", "#333438", "#1e4d68", "#47525c", "#233747", "#393040",
   "#393040", "#14394b", "#393040", "#2f3741", "#266d8b", "#171718", "#6b564c", "#262726",
   "#777975", "#3c81b9", "#322f38", "#393040", "#0d3041", "#3c81b9", "#1c3770"
 ];
-
-
 
 
 let redPastelPal = ["#FF6B6B", "#FF9E7C", "#98C9A3", "#738A94", "#E99497", "#A4BBC2", "#EAC5B5", "#A4BBC2",
@@ -115,7 +91,7 @@ let activeCol = [];
 let cloud = [];
 let shadow = false;
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 function wallpaper_background() {
