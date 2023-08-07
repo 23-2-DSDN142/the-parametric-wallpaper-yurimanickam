@@ -26,9 +26,10 @@ let wheelWidth = 20;
 let pHeight = 200 - platformHeight;
 let carScaleConst = 1.2;
 
+let cloud = [];
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.output_mode(GRID_WALLPAPER);
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
@@ -36,6 +37,7 @@ function setup_wallpaper(pWallpaper) {
   pWallpaper.grid_settings.cell_width  = 200;
   pWallpaper.grid_settings.cell_height = 200;
   pWallpaper.grid_settings.row_offset  = 100;
+
 }
 
 function wallpaper_background() {
@@ -48,6 +50,18 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   } else {
     randHi = pHeight;
   }
+
+
+  let billy = random(1,3)
+  let cloudPos = random(20, 180);
+  let cloudPos2 = random(20, 180);
+    if (random() < 0.5) {
+    push(); 
+    generateCloud(billy, cloudPos, cloudPos2);
+    drawCloud();
+    pop(); // Restore the original transformation state
+  }
+
   beamBottom(randHi);
   platform(randHi);
   beamTop(randHi);
@@ -58,12 +72,49 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   //}
   tires(randHi);
   wheel(randHi);
-
 }
 
 
 //precursor statement for easier input interaction
 
+
+function generateCloud(billy, pos, sop) {
+  noStroke();
+  let cloudX = pos;
+  let cloudY = sop;
+  let cloudWidth = random(25, 100); // Adjust the width range as needed
+  let cloudHeight = cloudWidth * random(0.6, billy); // Adjust the height range based on the width
+  let numEllipses = 2000; // Adjust the number of ellipses
+  let numBoundEllipses = 8; // Adjust the number of bound ellipses
+  let cloudShade = random(150, 255);
+  let cloudTransparency = random(0, 30);
+  
+  for (let i = 0; i < numBoundEllipses; i++) {
+    let boundsWidth = cloudWidth * random(0.8, 1.2); // Width of the bounds ellipse
+    let boundsHeight = boundsWidth * random(0.6, 0.8); // Height of the bounds ellipse
+    let xOffset = random(-cloudWidth / 2, cloudWidth / 2);
+    let yOffset = random(-cloudHeight / 2, cloudHeight / 2);
+    let boundX = cloudX + xOffset;
+    let boundY = cloudY + yOffset;
+    cloud.push({ x: boundX, y: boundY, cloudWidth: boundsWidth, cloudHeight: boundsHeight, numEllipses, cloudShade, cloudTransparency });
+  }
+}
+
+function drawCloud() {
+  for (let i = 0; i < cloud.length; i++) {
+    let { x, y, cloudWidth, cloudHeight, numEllipses, cloudShade, cloudTransparency } = cloud[i];
+    fill(cloudShade, cloudTransparency);
+    for (let j = 0; j < numEllipses; j++) {
+      let angle = map(j, 0, numEllipses, 0, TWO_PI); // Spread the ellipses evenly around the center
+      let radiusX = random(cloudWidth / 2); // Keep the ellipses within half of the width
+      let radiusY = random(cloudHeight / 2); // Keep the ellipses within half of the height
+      let ellipseX = x + radiusX * cos(angle);
+      let ellipseY = y + radiusY * sin(angle);
+      let ellipseSize = random(1, 5); // Adjust the size range of ellipses
+      ellipse(ellipseX, ellipseY, ellipseSize);
+    }
+  }
+}
 
 function beamBottom(pHeight){
   noStroke();
