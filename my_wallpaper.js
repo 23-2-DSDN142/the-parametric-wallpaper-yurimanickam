@@ -13,7 +13,12 @@ let beamWidth = 12;
 
 
 
-let cloud = [];
+
+
+//Global Variables
+let pHeight = 200 - platformHeight;
+let carScaleConst = 1.2;
+
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(DEVELOP_GLYPH);
@@ -44,14 +49,14 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     carBody(randHi);
     //pop(); // Restore the original transformation state
   //}
-  
+  carFloor(pHeight);
 
 }
 
 
 //precursor statement for easier input interaction
 
-let pHeight = 200 - platformHeight;
+
 function beamBottom(pHeight){
   noStroke();
   fill("#e24646");
@@ -107,8 +112,8 @@ function beamTop(pHeight) {
 
 function carBody(pHeight){
 push();
-  translate(20, -41 + pHeight);
-  scale(1.2,1,2);
+  translate(20, -46.5 + pHeight);
+  scale(carScaleConst,carScaleConst);
   //translate the elements all at once, or individually?
   fill("#0f0d0d");
   fill("#ca291c")
@@ -133,5 +138,60 @@ push();
   endShape();
 pop();
 }
+
+function carFloor(pHeight) {
+  push();
+  translate(21, 121);
+  scale(1.2, 1.2);
+
+  //wing left
+  fill("#647b81");
+  beginShape();
+  vertex(99.74, 6.82);
+  vertex(99.74, 15.14);
+  vertex(107.70, 15.14);
+  bezierVertex(108.18, 13.22, 108.64, 11.29, 109.09, 9.36);
+  vertex(99.74, 6.82);
+  endShape();
+
+  //wing right
+  fill("#3b4d4f");
+  beginShape();
+  vertex(119.83, 12.28);
+  vertex(109.09, 9.36);
+  bezierVertex(108.16, 11.33, 107.91, 13.27, 107.70, 15.14);
+  vertex(120.41, 15.14);
+  vertex(119.83, 12.28);
+  endShape();
+  
+  //main floor curve
+  fill("#647b81");
+  beginShape();
+  vertex(93.78, 4.68);
+  vertex(82.95, 4.68);
+  bezierVertex(76.80, 4.68, 70.66, 5.57, 64.65, 7.34);
+  vertex(57.38, 9.48);
+  bezierVertex(51.37, 11.25, 45.23, 12.14, 39.08, 12.14);
+  vertex(39.08, 12.14);
+  bezierVertex(28.22, 12.14, 17.46, 9.36, 7.36, 3.95);
+  vertex(0, 0);
+  vertex(0, 15.14);
+  vertex(92.88, 15.14);
+  vertex(93.78, 4.68);
+  endShape();
+
+  //coolshade, shark fin
+  fill("#3b4d4f");
+  beginShape();
+  vertex(72.10, 15.14);
+  vertex(63.37, 10.73);
+  bezierVertex(62.84, 10.46, 62.26, 10.43, 61.71, 10.64);
+  vertex(50.01, 15.14);
+  vertex(72.09, 15.14);
+  endShape();
+  pop();
+}
+
+
 
 
