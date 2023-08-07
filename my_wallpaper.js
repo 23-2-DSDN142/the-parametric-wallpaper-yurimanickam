@@ -1,7 +1,7 @@
 //my variables
 let x = 100;//global x
 
-let randomHeight = false // make the heights of the platforms have variability
+let randomHeight = false; // make the heights of the platforms have variability
 let heightRandomness = 1; //variability of tha random height
 let platformHeight = 30;//adjust the height the platform spawns at.
 let platformThickness = 15;
@@ -11,7 +11,7 @@ let beamOffset = 40;
 let beamWidth = 12;
 //structure variables, 40 on beamOffset makes the beams line up.
 
-let randomCar = true;
+let randomCar = false;
 let moveCarX = 0;
 let moveCarY = 0;
 let scaleCarX = 0;
@@ -21,8 +21,10 @@ let scaleCarY = 0;
 
 
 let wheelWidth = 23;
-let rimSize = 0.7
+let rimSize = 0.7;
 let suspensionHeight = 0;
+let tiresX = 0;
+let spokeWidth = 10;
 
 //Global Variables
 let pHeight = 200 - platformHeight;
@@ -31,12 +33,12 @@ let carScaleConst = 1.05;
 //clouds array
 let clouds = true;
 let cloud = [];
-let cloudDensity = 0;
-let cloudParticleSize = 0;
+let cloudDensity = 0.5;
+let cloudParticleSize = 0.5;
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(NINE_LANDSCAPE);
+  pWallpaper.output_mode(DEVELOP_GLYPH);
+  pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
   //Grid settings
@@ -47,7 +49,7 @@ function setup_wallpaper(pWallpaper) {
 }
 
 function wallpaper_background() {
-  background("#8ca1af");
+  background("#8fb4cc");
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
@@ -107,7 +109,7 @@ function generateCloud(cloudRand, pos, sop) {
   let cloudY = sop;
   let cloudWidth = random(25*cloudRand, 50*cloudRand); // Adjust the width range as needed
   let cloudHeight = random(10*cloudRand, 25*cloudRand); // Adjust the height range based on the width
-  let numEllipses = 500; // Adjust the number of ellipses
+  let numEllipses = 500 * cloudDensity; // Adjust the number of ellipses
   let numBoundEllipses = 8; // Adjust the number of bound ellipses
   let cloudShade = random(150, 200);
   let cloudTransparency = random(0, 30);
@@ -133,7 +135,7 @@ function drawCloud() {
       let radiusY = random(cloudHeight / 2); // Keep the ellipses within half of the height
       let ellipseX = x + radiusX * cos(angle);
       let ellipseY = y + radiusY * sin(angle);
-      let ellipseSize = random(1, 15); // Adjust the size range of ellipses
+      let ellipseSize = random(1, 15 * cloudParticleSize); // Adjust the size range of ellipses
       ellipse(ellipseX, ellipseY, ellipseSize);
     }
   }
@@ -373,7 +375,7 @@ function tires(pHeight) {
   ellipse(134, -9, wheelWidth);
 
   fill("#4c566b");
-  ellipse(51, -9, wheelWidth * rimSize);
+  ellipse(51, -9, wheelWidth *  rimSize);
   ellipse(134, -9, wheelWidth * rimSize);
   pop();
 }
@@ -384,8 +386,7 @@ function wheel(pHeight, wheelX, wheelY) {
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
   angleMode(RADIANS);
   let numSpokes = 30;
-  let spokeLength = 6;
-  let spokeWidth = 10;
+  let spokeLength = 8 * rimSize;
   let circleRadius = 2;
   let gradientIntensity = 3;
 
