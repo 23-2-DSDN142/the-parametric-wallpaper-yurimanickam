@@ -20,16 +20,17 @@ let scaleCarY = 0;
 let wingPitch = 0;
 
 
-let wheelWidth = 20;
+let wheelWidth = 23;
+let rimSize = 0.7
 
 //Global Variables
 let pHeight = 200 - platformHeight;
-let carScaleConst = 1.2;
+let carScaleConst = 1.05;
 
 let cloud = [];
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
+  pWallpaper.output_mode(DEVELOP_GLYPH);
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
@@ -68,15 +69,20 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   //if (random() < 0.6) {
     //push(); 
     carBody(randHi);
+    rearWing()
     //pop(); // Restore the original transformation state
   //}
-  tires(randHi);
-  wheel(randHi);
+  drawTires(randHi);
 }
 
 
 //precursor statement for easier input interaction
 
+
+function drawTires(randHi) {
+  tires(randHi);
+  wheel(randHi);
+}
 
 function generateCloud(billy, pos, sop) {
   noStroke();
@@ -84,7 +90,7 @@ function generateCloud(billy, pos, sop) {
   let cloudY = sop;
   let cloudWidth = random(25*billy, 50*billy); // Adjust the width range as needed
   let cloudHeight = random(5*billy, 15*billy); // Adjust the height range based on the width
-  let numEllipses = 300; // Adjust the number of ellipses
+  let numEllipses = 200; // Adjust the number of ellipses
   let numBoundEllipses = 8; // Adjust the number of bound ellipses
   let cloudShade = random(150, 255);
   let cloudTransparency = random(0, 30);
@@ -110,7 +116,7 @@ function drawCloud() {
       let radiusY = random(cloudHeight / 2); // Keep the ellipses within half of the height
       let ellipseX = x + radiusX * cos(angle);
       let ellipseY = y + radiusY * sin(angle);
-      let ellipseSize = random(1, 5); // Adjust the size range of ellipses
+      let ellipseSize = random(1, 15); // Adjust the size range of ellipses
       ellipse(ellipseX, ellipseY, ellipseSize);
     }
   }
@@ -171,36 +177,10 @@ function beamTop(pHeight) {
 
 function carBody() {
   push();
-  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
+  translate(16 + moveCarX, pHeight - 47 - moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
 
-  //Wing Top Part
-  fill("#ec3a2e");
-  beginShape();
-  vertex(18.79, 0);
-  vertex(1.23, 0);
-  bezierVertex(0.55, 0, 0, 0.75, 0, 1.67);
-  vertex(0, 15.85);
-  bezierVertex(4.14, 18.74, 8.33, 21.54, 12.21, 24.92);
-  vertex(12.21, 24.49);
-  bezierVertex(12.23, 24.02, 12.39, 23.57, 12.65, 23.27);
-  vertex(19.58, 15.29);
-  bezierVertex(19.86, 14.97, 20.02, 14.5, 20.02, 14.01);
-  vertex(20.02, 1.67);
-  bezierVertex(20.02, 0.75, 19.47, 0, 18.79, 0);
-  endShape();
-  
-  //Wing Bottom Part
-  fill("#647b81");
-  beginShape();
-  vertex(0, 29.32);
-  bezierVertex(0, 30.06, 0.35, 30.71, 0.87, 30.92);
-  vertex(10.43, 34.85);
-  bezierVertex(11.2, 35.17, 11.99, 34.4, 12.01, 33.3);
-  vertex(12.21, 24.92);
-  bezierVertex(8.33, 21.54, 4.14, 18.74, 0, 15.85);
-  vertex(0, 29.32);
-  endShape();
+
   
   //Main Body Part
   fill("#ec3a2e");
@@ -359,30 +339,6 @@ function carBody() {
   vertex(89.34, 43.29);
   endShape();
   
-  //WingStripe
-  fill("#ca291c");
-  beginShape();
-  vertex(0, 3.39);
-  vertex(14.12, 3.39);
-  vertex(14.12, 10.04);
-  vertex(0, 10.04);
-  vertex(0, 3.39);
-  endShape();
-  
-  //WingSticker
-  fill("#fbb833");
-  beginShape();
-  vertex(13.22, 3.39);
-  vertex(16.52, 3.39);
-  vertex(17.31, 4.18);
-  vertex(17.31, 9.25);
-  vertex(16.52, 10.04);
-  vertex(13.22, 10.04);
-  vertex(12.43, 9.25);
-  vertex(12.43, 4.18);
-  vertex(13.22, 3.39);
-  endShape();
-  
   //BodyVent1
   fill("#fbb833");
   beginShape();
@@ -412,25 +368,30 @@ function tires(pHeight) {
   translate(0 + moveCarX, pHeight - 0 + moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
 
-  ellipse(0, 0, wheelWidth);
-  ellipse(100, 0, wheelWidth);
+  fill("#181717");
+  ellipse(51, -9, wheelWidth);
+  ellipse(134, -9, wheelWidth);
+
+  fill("#fbb833");
+  ellipse(51, -9, wheelWidth * rimSize);
+  ellipse(134, -9, wheelWidth * rimSize);
   pop();
 }
 
 
 function wheel(pHeight) {
   push();
-  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
+  translate(0 + moveCarX, pHeight - 0 + moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
   angleMode(RADIANS);
-  let numSpokes = 40;
-  let spokeLength = 10;
-  let spokeWidth = 20;
+  let numSpokes = 30;
+  let spokeLength = 6;
+  let spokeWidth = 10;
   let circleRadius = 2;
   let gradientIntensity = 3;
 
-  let centerX = 0; // Use your desired x value
-  let centerY = 0; // Use your desired y value
+  let centerX = 51; // Use your desired x value
+  let centerY = -9; // Use your desired y value
 
   let angleStep = TWO_PI / numSpokes;
 
@@ -454,11 +415,74 @@ function wheel(pHeight) {
       let w = bezierPoint(innerX, cx1, cx2, outerX, t);
       let e = bezierPoint(innerY, cy1, cy2, outerY, t);
 
-      let gradientColor = lerpColor(color("#a9f5d2"), color("#86cea4"), t * gradientIntensity);
+      let gradientColor = lerpColor(color("#262726"), color("#757977"), t * gradientIntensity);
       stroke(gradientColor);
-      strokeWeight(0.5);
+      strokeWeight(0.1);
       point(w, e);
     } 
   }
   pop();
+}
+
+
+function rearWing(){
+  push();
+  translate(16 + moveCarX, pHeight - 47 - moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+    //Wing Top Part
+    fill("#ec3a2e");
+    beginShape();
+    vertex(18.79, 0);
+    vertex(1.23, 0);
+    bezierVertex(0.55, 0, 0, 0.75, 0, 1.67);
+    vertex(0, 15.85);
+    bezierVertex(4.14, 18.74, 8.33, 21.54, 12.21, 24.92);
+    vertex(12.21, 24.49);
+    bezierVertex(12.23, 24.02, 12.39, 23.57, 12.65, 23.27);
+    vertex(19.58, 15.29);
+    bezierVertex(19.86, 14.97, 20.02, 14.5, 20.02, 14.01);
+    vertex(20.02, 1.67);
+    bezierVertex(20.02, 0.75, 19.47, 0, 18.79, 0);
+    endShape();
+    rect(10,20,20,15);
+    
+    //Wing Bottom Part
+    fill("#647b81");
+    beginShape();
+    vertex(0, 29.32);
+    bezierVertex(0, 30.06, 0.35, 30.71, 0.87, 30.92);
+    vertex(10.43, 34.85);
+    bezierVertex(11.2, 35.17, 11.99, 34.4, 12.01, 33.3);
+    vertex(12.21, 24.92);
+    bezierVertex(8.33, 21.54, 4.14, 18.74, 0, 15.85);
+    vertex(0, 29.32);
+    endShape();
+
+     //WingStripe
+  fill("#ca291c");
+  beginShape();
+  vertex(0, 3.39);
+  vertex(14.12, 3.39);
+  vertex(14.12, 10.04);
+  vertex(0, 10.04);
+  vertex(0, 3.39);
+  endShape();
+  
+  //WingSticker
+  fill("#fbb833");
+  beginShape();
+  vertex(13.22, 3.39);
+  vertex(16.52, 3.39);
+  vertex(17.31, 4.18);
+  vertex(17.31, 9.25);
+  vertex(16.52, 10.04);
+  vertex(13.22, 10.04);
+  vertex(12.43, 9.25);
+  vertex(12.43, 4.18);
+  vertex(13.22, 3.39);
+  endShape();
+  pop();
+}
+
+function frontWing(){
 }
