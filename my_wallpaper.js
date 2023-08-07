@@ -3,7 +3,7 @@ let x = 100;//global x
 
 let randomHeight = false; // make the heights of the platforms have variability
 let heightRandomness = 1; //variability of tha random height
-let platformHeight = 30;//adjust the height the platform spawns at.
+let platformHeight = 50;//adjust the height the platform spawns at.
 let platformThickness = 15;
 let platformDepth = 20;//how tall the ellipse is in relation to its width, adjusting depth
 
@@ -22,6 +22,8 @@ let rimSize = 0.7;
 let suspensionHeight = 0;
 let tiresX = 0;
 let spokeWidth = 10;
+
+
 
 //Global Variables
 let pHeight = 200 - platformHeight;
