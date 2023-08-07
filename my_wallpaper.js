@@ -73,7 +73,7 @@ let cloud = [];
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(A3);
+  pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
   //Grid settings
@@ -88,6 +88,16 @@ function wallpaper_background() {
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
+  //transforming everything at once for ease of use
+  push();
+  translate(0, 0);
+  scale(1, 1);
+  symbols();
+  pop();
+}
+
+
+function symbols() {
   //randHi is used around this, it is simply another variable for a random Height.
   
   //the weighting between the colour combos
@@ -148,8 +158,6 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   frontWing(randHi, activeCol);
   }
 }
-
-
 function drawTires(randHi) {
   tires(randHi);
   wheel(randHi, 51, -9);
