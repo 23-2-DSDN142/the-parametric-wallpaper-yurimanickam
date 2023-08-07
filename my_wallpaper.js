@@ -242,11 +242,9 @@ function platform(pHeight, shadow) {
   }
   fill("#867a7a");
   ellipse(x , pHeight, 180, 180/platformDepth);
-  if (shadow == true) {
-  fill("#1a171779");
+  fill("#1f1c1c3b");
   ellipse(x , pHeight, 150 * scaleCarX, 140 * scaleCarY/platformDepth);
   //upper platform stays a uniform colour throughout iterations, althought this is an easy enough change if needed
-  }
 }
 
 function beamTop(pHeight) {
