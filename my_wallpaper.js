@@ -20,6 +20,8 @@ let scaleCarY = 0;
 let wingPitch = 0;
 
 
+let wheelWidth = 20;
+
 //Global Variables
 let pHeight = 200 - platformHeight;
 let carScaleConst = 1.2;
@@ -55,7 +57,7 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     //pop(); // Restore the original transformation state
   //}
   tires(randHi);
-  wheel();
+  wheel(randHi);
 
 }
 
@@ -356,13 +358,19 @@ function carBody() {
 
 function tires(pHeight) {
   push();
-  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
+  translate(0 + moveCarX, pHeight - 0 + moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
 
+  ellipse(0, 0, wheelWidth);
+  ellipse(100, 0, wheelWidth);
   pop();
 }
-function wheel() {
+
+
+function wheel(pHeight) {
   push();
+  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
+  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
   angleMode(RADIANS);
   let numSpokes = 40;
   let spokeLength = 10;
