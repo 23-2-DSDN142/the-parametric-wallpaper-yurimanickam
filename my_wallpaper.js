@@ -1,6 +1,5 @@
 //my variables
-let x = 100;//global x and y 
-//structure variables, 40 on beamOffset makes the beams line up.
+let x = 100;//global x
 
 let randomHeight = false // make the heights of the platforms have variability
 let heightRandomness = 1; //variability of tha random height
@@ -10,27 +9,34 @@ let platformDepth = 15;//how tall the ellipse is in relation to its width, adjus
 
 let beamOffset = 40;
 let beamWidth = 12;
+//structure variables, 40 on beamOffset makes the beams line up.
 
-
+let randomCar = false;
 let moveCarX = 0;
 let moveCarY = 0;
 let scaleCarX = 0;
 let scaleCarY = 0;
 
 let wingPitch = 0;
+let spoilerPitch = 0;
 
 
 let wheelWidth = 23;
 let rimSize = 0.7
+let suspensionHeight = 0;
 
 //Global Variables
 let pHeight = 200 - platformHeight;
 let carScaleConst = 1.05;
 
+//clouds array
+let clouds = true;
 let cloud = [];
+let cloudDensity = 0;
+let cloudParticleSize = 0;
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
+  pWallpaper.output_mode(DEVELOP_GLYPH);
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
@@ -56,7 +62,7 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   let cloudRand = random(1,1.5)
   let cloudPos = random(20, 180);
   let cloudPos2 = random(20, 180);
-    if (random() < 1) {
+    if (random() < 1 && clouds == true) {
     push(); 
     generateCloud(cloudRand, cloudPos, cloudPos2);
     drawCloud();
@@ -66,12 +72,17 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   beamBottom(randHi);
   platform(randHi);
   beamTop(randHi);
-  //if (random() < 0.6) {
-    //push(); 
-    carBody(randHi);
+
+  if (random() < 0.6 && randomCar == true) {
+    push(); 
     rearWing()
-    //pop(); // Restore the original transformation state
-  //}
+    carBody(randHi);
+    pop(); // Restore the original transformation state
+  }else {
+    rearWing()
+    carBody(randHi);
+  }
+
   drawTires(randHi);
 }
 
@@ -156,6 +167,8 @@ function platform(pHeight) {
   }
   fill("#867a7a");
   ellipse(x , pHeight, 180, 180/platformDepth);
+  fill("#1a171779");
+  ellipse(x , pHeight, 150 * carScaleConst, 140 * carScaleConst/platformDepth);
   //upper platform stays a uniform colour throughout iterations, althought this is an easy enough change if needed
 }
 
