@@ -54,12 +54,7 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     carBody(randHi);
     //pop(); // Restore the original transformation state
   //}
-  carShades(pHeight)
-  carFloor(pHeight);
-  spoiler(pHeight);
-  carHighlights(pHeight);
-  rearWing(pHeight);
-  
+  tires(randHi);
 
 }
 
@@ -120,218 +115,245 @@ function beamTop(pHeight) {
 }
 }
 
-function carBody(pHeight){
-push();
-  translate(20 + moveCarX, -46.5 + pHeight + moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-  //translate the elements all at once, or individually?
-  fill("#0f0d0d");
-  fill("#ac3d29")
-  beginShape();
-  vertex(112.86,28.37);
-  vertex(89.57,17.56);
-  bezierVertex(87.01,16.48,84.34,15.94,81.66,15.94);
-  vertex(68.44,15.94);
-  vertex(66.35,13.86);
-  bezierVertex(64.2,11.71,61.6,10.56,58.93,10.56);
-  vertex(49.83,10.56);
-  vertex(49.83,0);
-  vertex(40.034,0);
-  bezierVertex(33.16,0,26.35,1.99,20.08,5.84);
-  vertex(0,18.18);
-  vertex(0,30.69);
-  vertex(4.67,30.69);
-  vertex(4.67,38.01);
-  vertex(113.52,38.01);
-  vertex(128.11,35.58);
-  vertex(112.86,28.37);
-  endShape();
-pop();
-}
-
-function carFloor(pHeight) {
+function carBody() {
   push();
   translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
 
-  //wing left
+  //Wing Top Part
+  fill("#ec3a2e");
+  beginShape();
+  vertex(18.79, 0);
+  vertex(1.23, 0);
+  bezierVertex(0.55, 0, 0, 0.75, 0, 1.67);
+  vertex(0, 15.85);
+  bezierVertex(4.14, 18.74, 8.33, 21.54, 12.21, 24.92);
+  vertex(12.21, 24.49);
+  bezierVertex(12.23, 24.02, 12.39, 23.57, 12.65, 23.27);
+  vertex(19.58, 15.29);
+  bezierVertex(19.86, 14.97, 20.02, 14.5, 20.02, 14.01);
+  vertex(20.02, 1.67);
+  bezierVertex(20.02, 0.75, 19.47, 0, 18.79, 0);
+  endShape();
+  
+  //Wing Bottom Part
   fill("#647b81");
   beginShape();
-  vertex(99.74, 6.82);
-  vertex(99.74, 15.14);
-  vertex(107.70, 15.14);
-  bezierVertex(108.18, 13.22, 108.64, 11.29, 109.09, 9.36);
-  vertex(99.74, 6.82);
-  endShape();
-
-  //wing right
-  fill("#3b4d4f");
-  beginShape();
-  vertex(119.83, 12.28);
-  vertex(109.09, 9.36);
-  bezierVertex(108.16, 11.33, 107.91, 13.27, 107.70, 15.14);
-  vertex(120.41, 15.14);
-  vertex(119.83, 12.28);
+  vertex(0, 29.32);
+  bezierVertex(0, 30.06, 0.35, 30.71, 0.87, 30.92);
+  vertex(10.43, 34.85);
+  bezierVertex(11.2, 35.17, 11.99, 34.4, 12.01, 33.3);
+  vertex(12.21, 24.92);
+  bezierVertex(8.33, 21.54, 4.14, 18.74, 0, 15.85);
+  vertex(0, 29.32);
   endShape();
   
-  //main floor curve
+  //Main Body Part
+  fill("#ec3a2e");
+  beginShape();
+  vertex(129.1, 33.65);
+  vertex(105.81, 22.84);
+  bezierVertex(103.25, 21.77, 100.58, 21.22, 97.9, 21.22);
+  vertex(84.68, 21.22);
+  vertex(82.59, 19.14);
+  bezierVertex(80.44, 16.99, 77.84, 15.84, 75.17, 15.84);
+  vertex(66.07, 15.84);
+  vertex(66.07, 5.29);
+  vertex(56.28, 5.29);
+  bezierVertex(49.4, 5.29, 42.59, 7.28, 36.32, 11.13);
+  vertex(16.23, 23.46);
+  vertex(16.23, 35.97);
+  vertex(20.9, 35.97);
+  vertex(20.9, 43.29);
+  vertex(125.03, 43.29);
+  bezierVertex(125.18, 39.09, 126.8, 35.92, 129.08, 33.65);
+  endShape();
+  
+  //Front WingTip Overlay
+  fill("#ca291c");
+  beginShape();
+  vertex(144.35, 40.86);
+  vertex(129.1, 33.65);
+  bezierVertex(126.81, 35.92, 125.2, 39.09, 125.05, 43.29);
+  vertex(129.77, 43.29);
+  vertex(144.36, 40.86);
+  endShape();
+  
+  //Front WingTip Behind
   fill("#647b81");
   beginShape();
-  vertex(93.78, 4.68);
-  vertex(82.95, 4.68);
-  bezierVertex(76.80, 4.68, 70.66, 5.57, 64.65, 7.34);
-  vertex(57.38, 9.48);
-  bezierVertex(51.37, 11.25, 45.23, 12.14, 39.08, 12.14);
-  vertex(39.08, 12.14);
-  bezierVertex(28.22, 12.14, 17.46, 9.36, 7.36, 3.95);
-  vertex(0, 0);
-  vertex(0, 15.14);
-  vertex(92.88, 15.14);
-  vertex(93.78, 4.68);
+  vertex(116.98, 34.97);
+  vertex(116.98, 43.29);
+  vertex(124.94, 43.29);
+  bezierVertex(125.42, 41.37, 125.88, 39.44, 126.33, 37.51);
+  vertex(116.98, 34.97);
   endShape();
-
-  //coolshade, shark fin
+  
+  //Front WingTip Front
   fill("#3b4d4f");
   beginShape();
-  vertex(72.10, 15.14);
-  vertex(63.37, 10.73);
-  bezierVertex(62.84, 10.46, 62.26, 10.43, 61.71, 10.64);
-  vertex(50.01, 15.14);
-  vertex(72.09, 15.14);
-  endShape();
-  pop();
-
-  //lil wingtip tpye of thing.
-  fill("#30363686");
-  push();
-  translate(150.3 + moveCarX, pHeight - 12.55 + moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-  beginShape();
-  vertex(19.31,7.21);
-  vertex(4.05,0);
-  bezierVertex(1.77,2.27,0.15,5.44,0,9.64);
-  vertex(4.72,9.64);
-  vertex(19.31,7.21);
-  endShape();
-  pop();
-}
-
-
-
-function americasTestCar(pHeight) {
-  push();
-  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-
-  pop();
-}
-
-function spoiler(pHeight) {
-  push();
-  fill("#af1a1a")
-  //front spoiler parts
-  translate(155 + moveCarX, pHeight - 7 + moveCarY);
-  rotate(wingPitch);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-  beginShape();
-  vertex(22.02,4.8);
-  vertex(22.02,2.69);
-  bezierVertex(22.02,1.2,21.13,-0.01,20.04,-0.01);
-  vertex(1.09,-0.01);
-  bezierVertex(0.22,0,0.3,1.54,0,2.66);
-  vertex(2.35,5.48);
-  bezierVertex(6.27,7.4,17.83,5.29,22.02,4.81);
-  endShape();
-  pop();
-
-  //HIghlight
-  push();
-  fill("#cc7511")
-
-  translate(157.5 + moveCarX, pHeight - 5.5 + moveCarY);
-  rotate(wingPitch);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-  beginShape();
-  vertex(19.67,3.32);
-  bezierVertex(19.67,3.32,4.4,6.05,0,3.99);
-  bezierVertex(0,3.99,18.6,-4.53,19.67,3.32);
-  endShape()
-  pop();
-}
-
-
-function carShades() {
-push();
-  translate(25.5 + moveCarX, pHeight - 42 + moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
-
-  fill("#72291c");
-  beginShape();
-  vertex(0, 34.18);
-  vertex(0, 34.32);
-  vertex(68.44, 34.32);
-  bezierVertex(48.05, 17.56, 20.24, 16.69, 0, 34.18);
+  vertex(137.08, 40.43);
+  vertex(126.34, 37.51);
+  bezierVertex(125.41, 39.48, 125.16, 41.42, 124.95, 43.29);
+  vertex(137.66, 43.29);
+  vertex(137.08, 40.43);
   endShape();
   
-  fill("#72291c");
+  //Big Round Shading Bitte
+  fill("#ca291c");
   beginShape();
-  vertex(63.83, 12.27);
-  vertex(33.47, 12.27);
-  bezierVertex(33.05, 12.27, 33.00, 13.12, 33.43, 13.19);
-  vertex(59.17, 17.84);
-  bezierVertex(61.64, 18.29, 63.84, 15.67, 63.84, 12.27);
-  vertex(63.84, 12.27);
+  vertex(20.91, 43.15);
+  vertex(20.91, 43.29);
+  vertex(89.35, 43.29);
+  bezierVertex(68.96, 26.53, 41.15, 25.66, 20.91, 43.15);
   endShape();
   
-  fill("#72291c");
+  //Curvy Big Shading Bitte
+  fill("#647b81");
   beginShape();
-  vertex(45.17, 6.87);
-  vertex(19.03, 6.87);
-  bezierVertex(18.43, 6.87, 18.27, 5.75, 18.82, 5.44);
-  vertex(19.38, 5.12);
-  bezierVertex(25.31, 1.74, 31.69, 0.00, 38.13, 0.00);
-  vertex(45.16, 0.00);
-  vertex(45.16, 6.87);
+  vertex(111.03, 32.83);
+  vertex(100.2, 32.83);
+  bezierVertex(94.05, 32.83, 87.91, 33.72, 81.9, 35.49);
+  vertex(74.63, 37.63);
+  bezierVertex(68.62, 39.4, 62.48, 40.29, 56.33, 40.29);
+  vertex(56.33, 40.29);
+  bezierVertex(45.47, 40.29, 34.71, 37.51, 24.61, 32.1);
+  vertex(17.25, 28.15);
+  vertex(17.25, 43.29);
+  vertex(110.13, 43.29);
+  vertex(111.03, 32.83);
   endShape();
   
-  fill("#72291c");
+  //Air Intake
+  fill("#3b4d4f");
   beginShape();
-  vertex(72.90, 12.27);
-  vertex(70.98, 9.80);
-  bezierVertex(69.86, 8.36, 68.39, 7.56, 66.85, 7.56);
-  vertex(66.05, 7.56);
-  bezierVertex(65.47, 7.56, 65.01, 8.20, 65.01, 8.98);
-  vertex(65.01, 8.98);
-  bezierVertex(65.01, 9.76, 65.48, 10.40, 66.05, 10.40);
-  vertex(68.72, 10.40);
-  vertex(70.14, 12.27);
-  vertex(72.90, 12.27);
+  vertex(94.11, 28.92);
+  bezierVertex(94.11, 26.31, 95.66, 24.2, 97.57, 24.2);
+  vertex(94.01, 24.2);
+  bezierVertex(92.1, 24.2, 90.55, 26.31, 90.55, 28.92);
+  bezierVertex(90.55, 29.45, 90.87, 29.63, NaN, 32.48);
+  bezierVertex(NaN, 32.48, NaN, 32.05, NaN, 31.52);
+  endShape();
+  
+  //Air Intake Behind
+  fill("#ca291c");
+  beginShape();
+  vertex(84.74, 21.24);
+  vertex(54.38, 21.24);
+  bezierVertex(53.96, 21.24, 53.91, 22.09, 54.34, 22.16);
+  vertex(80.08, 26.81);
+  bezierVertex(82.55, 27.26, 84.75, 24.64, 84.75, 21.24);
+  vertex(84.75, 21.24);
+  endShape();
+  
+  //Engine Intake
+  fill("#ca291c");
+  beginShape();
+  vertex(66.08, 15.84);
+  vertex(39.94, 15.84);
+  bezierVertex(39.34, 15.84, 39.18, 14.72, 39.73, 14.41);
+  vertex(40.29, 14.09);
+  bezierVertex(46.23, 10.71, 52.61, 8.97, 59.05, 8.97);
+  vertex(66.08, 8.97);
+  vertex(66.08, 15.84);
   endShape();
 
-
-  fill("#fbb833")
-  rect(45,-3.9,2,10.8)
-  fill("#fbb833")
+  //Intake Cover
+  fill("#fbb833");
   beginShape();
-  vertex(0,10.52);
-  vertex(4.88,10.52);
-  vertex(4.88,13.48);
-  bezierVertex(4.88,14.35,4.17,15.05,3.3099999999999996,15.05);
-  vertex(1.5699999999999996,15.05);
-  bezierVertex(0.71,15.06,0,14.35,0,13.48);
-  vertex(0,10.52);
+  vertex(66.08, 5.29);
+  vertex(67.32, 5.29);
+  vertex(67.32, 15.84);
+  vertex(66.08, 15.84);
+  vertex(66.08, 5.29);
   endShape();
-pop();
-}
-
-function carHighlights(pHeight) {
-  push();
-  translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
-  scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
+  
+  //RV Mirror
+  fill("#ca291c");
+  beginShape();
+  vertex(93.82, 21.24);
+  vertex(91.9, 18.77);
+  bezierVertex(90.78, 17.33, 89.31, 16.53, 87.77, 16.53);
+  vertex(86.97, 16.53);
+  bezierVertex(86.39, 16.53, 85.93, 17.17, 85.93, 17.95);
+  vertex(85.93, 17.95);
+  bezierVertex(85.93, 18.73, 86.4, 19.37, 86.97, 19.37);
+  vertex(89.64, 19.37);
+  vertex(91.06, 21.24);
+  vertex(93.82, 21.24);
+  endShape();
+  
+  //FrontWing Top
+  fill("#ec3a2e");
+  beginShape();
+  vertex(155.79, 43.66);
+  vertex(155.79, 41.55);
+  bezierVertex(155.79, 40.06, 154.9, 38.85, 153.81, 38.85);
+  vertex(134.86, 38.85);
+  bezierVertex(133.99, 38.85, 134.07, 40.39, 133.77, 41.51);
+  vertex(136.12, 44.33);
+  bezierVertex(140.04, 46.25, 151.6, 44.14, 155.79, 43.66);
+  endShape();
+  
+  //SharkFin
+  fill("#3b4d4f");
+  beginShape();
+  vertex(89.35, 43.29);
+  vertex(80.62, 38.88);
+  bezierVertex(80.09, 38.61, 79.51, 38.58, 78.96, 38.79);
+  vertex(67.26, 43.29);
+  vertex(89.34, 43.29);
+  endShape();
+  
+  //WingStripe
+  fill("#ca291c");
+  beginShape();
+  vertex(0, 3.39);
+  vertex(14.12, 3.39);
+  vertex(14.12, 10.04);
+  vertex(0, 10.04);
+  vertex(0, 3.39);
+  endShape();
+  
+  //WingSticker
+  fill("#fbb833");
+  beginShape();
+  vertex(13.22, 3.39);
+  vertex(16.52, 3.39);
+  vertex(17.31, 4.18);
+  vertex(17.31, 9.25);
+  vertex(16.52, 10.04);
+  vertex(13.22, 10.04);
+  vertex(12.43, 9.25);
+  vertex(12.43, 4.18);
+  vertex(13.22, 3.39);
+  endShape();
+  
+  //BodyVent1
+  fill("#fbb833");
+  beginShape();
+  vertex(42.1, 15.81);
+  vertex(46.98, 15.81);
+  vertex(46.98, 18.77);
+  bezierVertex(46.98, 19.64, 46.27, 20.34, 45.41, 20.34);
+  vertex(43.67, 20.34);
+  bezierVertex(42.8, 20.34, 42.1, 19.63, 42.1, 18.77);
+  vertex(42.1, 15.81);
+  endShape();
+  
+  //FrontWing Bottom
+  fill("#c6c62a");
+  beginShape();
+  vertex(136.12, 44.33);
+  bezierVertex(136.12, 44.33, 154.72, 35.81, 155.79, 43.66);
+  bezierVertex(155.79, 43.66, 140.52, 46.39, 136.12, 44.33);
+  endShape();
 
   pop();
 }
-function rearWing(pHeight) {
+
+
+function tires(pHeight) {
   push();
   translate(21 + moveCarX, pHeight - 18.86 + moveCarY);
   scale(carScaleConst + scaleCarX, carScaleConst + scaleCarY);
