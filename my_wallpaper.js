@@ -11,19 +11,22 @@ let beamOffset = 40;
 let beamWidth = 12;
 //structure variables, 40 on beamOffset makes the beams line up.
 
-let carVariation = 0.5;
-let randomCar = false;
+let carVariation = 0.5;//variation between colours
+let randomCar = false;//random distrobution of cars
+
 let moveCarX = 0;
 let moveCarY = 0;
 let scaleCarX = 1;
 let scaleCarY = 1;
 
+//wheel alterations
 let wheelWidth = 23;
 let rimSize = 0.7;
 let suspensionHeight = 0;
 let tiresX = 0;
 let spokeWidth = 10;
 
+//clouds
 let clouds = true;
 let cloudDensity = 0.7;
 let cloudParticleSize = 1;
@@ -32,12 +35,15 @@ let cloudParticleSize = 1;
 let pHeight = 200 - platformHeight;
 let carScaleConst = 1.05;
 
-let redVariant = ["#9b2e2e", "#973e0a", "#647b81", "#3b4d4f", "#ca291c", "#647b81", "#3b4d4f", "#ca291c",
-"#ca291c", "#fbb833", "#ca291c", "#3b4d4f", "#fbb833", "#181717", "#4c566b", "#262726",
-"#757977", "#ec3a2e", "#647b81", "#ca291c", "#fbb833", "#ec3a2e", "#e7c21d"];
 
-let blueVariant = ["#3c81b9", "#393040", "#3b324b", "#4f4d3b", "#393040", "#36323d", "#4f4d3b", "#393040",
-"#393040", "#14394b", "#393040", "#4d4f3b", "#113342", "#171718", "#6b564c", "#262726",
+//used www,realtimecolors.com to get good accent tones ect
+let redVariant = ["#9b2e2e", "#973e0a", "#647b81", "#3b4d4f", "#280B0B", "#647b81", "#3b4d4f", "#280B0B",
+"#280B0B", "#d19825", "#280B0B", "#3b4d4f", "#b6831e", "#181717", "#4c566b", "#262726",
+"#757977", "#9b2e2e", "#647b81", "#280B0B", "#b6831d", "#9b2e2e", "#b38219"];
+//colours for the cars, in arrays for customisability and abberation
+
+let blueVariant = ["#3c81b9", "#393040", "#aa521e", "#4f4d3b", "#1e4d68", "#47525c", "#4f4d3b", "#393040",
+"#393040", "#14394b", "#393040", "#4d4f3b", "#266d8b", "#171718", "#6b564c", "#262726",
 "#777975", "#3c81b9", "#322f38", "#393040", "#0d3041", "#3c81b9", "#134955"];
 
 let activeCol = [];
@@ -63,20 +69,23 @@ function wallpaper_background() {
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
+  //randHi is used around this, it is simply another variable for a random Height.
   
+  //the weighting between the two colour combos
   if (random(0,1) < carVariation) {
     activeCol = redVariant;
   }else {
     activeCol = blueVariant;
   }
 
-
+//randomHeight stuff
   if (randomHeight == true) {
     randHi = pHeight + random(-10 * heightRandomness, 10 * heightRandomness);
   } else {
     randHi = pHeight;
   }
 
+  //generating the clouds and their ranoms anew every time
   let cloudRand = random(1,1.5)
   let cloudPos = random(20, 180);
   let cloudPos2 = random(20, 180);
@@ -87,10 +96,12 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
     pop();
   }
 
+  //structures, unhindered 
   beamBottom(randHi);
   platform(randHi);
   beamTop(randHi);
 
+  //couldve used elif but this just split things a bit better mentally
   if (random(0,1) < 0.5 && randomCar == true) {
     push(); 
     rearWing(activeCol)
@@ -116,6 +127,9 @@ function drawTires(randHi) {
   wheel(randHi, 134, -9);
 }
 
+
+//these are inspired, but not derivative from https://openprocessing.org/sketch/1829701
+//its a bit janky but it works for the purpose and is simple enough to follow
 function generateCloud(cloudRand, pos, sop) {
   cloud = [];
   noStroke();
