@@ -508,7 +508,7 @@ function frontWing(pHeight){
 
 
   //FrontWing Bottom
-  fill("#c6c62a");
+  fill("#f0bc13");
   beginShape();
   vertex(136.12, 44.33);
   bezierVertex(136.12, 44.33, 154.72, 35.81, 155.79, 43.66);
