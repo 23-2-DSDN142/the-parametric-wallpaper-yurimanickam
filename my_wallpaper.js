@@ -32,13 +32,13 @@ let cloudParticleSize = 1;
 let pHeight = 200 - platformHeight;
 let carScaleConst = 1.05;
 
-let redVariant = ["#ec3a2e", "#ca291c", "#647b81", "#3b4d4f", "#ca291c", "#647b81", "#3b4d4f", "#ca291c",
+let redVariant = ["#9b2e2e", "#973e0a", "#647b81", "#3b4d4f", "#ca291c", "#647b81", "#3b4d4f", "#ca291c",
 "#ca291c", "#fbb833", "#ca291c", "#3b4d4f", "#fbb833", "#181717", "#4c566b", "#262726",
 "#757977", "#ec3a2e", "#647b81", "#ca291c", "#fbb833", "#ec3a2e", "#e7c21d"];
 
-let blueVariant = ["#2e64ec", "#1c2cca", "#8164b8", "#4f4d3b", "#1c2cca", "#8164b8", "#4f4d3b", "#1c2cca",
-"#1c2cca", "#14394b", "#1c2cca", "#4d4f3b", "#113342", "#171718", "#6b564c", "#262726",
-"#777975", "#2e64ec", "#8164b8", "#1c2cca", "#0d3041", "#2e64ec", "#134955"];
+let blueVariant = ["#3c81b9", "#393040", "#3b324b", "#4f4d3b", "#393040", "#36323d", "#4f4d3b", "#393040",
+"#393040", "#14394b", "#393040", "#4d4f3b", "#113342", "#171718", "#6b564c", "#262726",
+"#777975", "#3c81b9", "#322f38", "#393040", "#0d3041", "#3c81b9", "#134955"];
 
 let activeCol = [];
 //clouds array
@@ -59,7 +59,7 @@ function setup_wallpaper(pWallpaper) {
 }
 
 function wallpaper_background() {
-  background("#8fb4cc");
+  background("#98b5c0");
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
