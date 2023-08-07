@@ -52,10 +52,10 @@ function my_symbol() { // do not rename this function. Treat this similarly to a
   }
 
 
-  let billy = random(1,3)
+  let billy = random(0.5,1.1)
   let cloudPos = random(20, 180);
   let cloudPos2 = random(20, 180);
-    if (random() < 0.5) {
+    if (random() < 0.7) {
     push(); 
     generateCloud(billy, cloudPos, cloudPos2);
     drawCloud();
@@ -82,9 +82,9 @@ function generateCloud(billy, pos, sop) {
   noStroke();
   let cloudX = pos;
   let cloudY = sop;
-  let cloudWidth = random(25, 100); // Adjust the width range as needed
-  let cloudHeight = cloudWidth * random(0.6, billy); // Adjust the height range based on the width
-  let numEllipses = 2000; // Adjust the number of ellipses
+  let cloudWidth = random(25*billy, 50*billy); // Adjust the width range as needed
+  let cloudHeight = random(5*billy, 15*billy); // Adjust the height range based on the width
+  let numEllipses = 300; // Adjust the number of ellipses
   let numBoundEllipses = 8; // Adjust the number of bound ellipses
   let cloudShade = random(150, 255);
   let cloudTransparency = random(0, 30);
