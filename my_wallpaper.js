@@ -1,3 +1,6 @@
+//this program makes extensive use of randomised modifiers, so not every set of settings will recreate the exact same result.
+//however, there are more than enough parameters that do not rely on randomisation to make determenistic wallpapers when needed. 
+
 //my parameters
 let randomHeight = false; // make the heights of the platforms have variability
 let heightRandomness = 0.5; //variability of tha random height
@@ -26,6 +29,7 @@ let tiresX = 0;
 let spokeWidth = 10;
 
 //clouds
+//warning, as higher clouddensity increasing calculation time, and may crash if too high.
 let clouds = true;
 let cloudDensity = 0.7;
 let cloudParticleSize = 1;
@@ -69,7 +73,7 @@ let cloud = [];
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(FIT_TO_SCREEN);
+  pWallpaper.resolution(A3);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
 
   //Grid settings
