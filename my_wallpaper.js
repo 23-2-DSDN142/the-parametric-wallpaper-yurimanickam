@@ -27,7 +27,7 @@ let wheelWidth = 22;
 let rimSize = 0.5;
 let suspensionHeight = 0;
 let tiresX = 0;
-let spokeWidth = 0;
+let spokeWidth = 20;
 let spokeStroke = 0.2;
 
 //clouds
@@ -41,7 +41,7 @@ let globalY = 1;
 
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GLIDE_WALLPAPER);
+  pWallpaper.output_mode(DEVELOP_GLYPH);
   pWallpaper.resolution(NINE_LANDSCAPE);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
 
@@ -51,6 +51,7 @@ function setup_wallpaper(pWallpaper) {
   pWallpaper.grid_settings.cell_height = 200;
   pWallpaper.grid_settings.row_offset = 100; //0 for A3, 100 for ninewp
 }
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -238,10 +239,10 @@ function beamBottom(pHeight) {
   fill("#e24646");
   let beamCenterXLeft = x - 10 - beamOffset;
   let beamCenterXRight = x + 10 + beamOffset;
-  let beamHeight = (200 - pHeight) * 5;
+  let beamHeight = (200 - pHeight) * 10;
 
   for (let i = 0; i < beamHeight; i++) {
-    let yPos = 200 + 0.2 * -i;
+    let yPos = 200 + 0.1 * -i;
     //shades of grey
     let shade = random(60, 80);
     fill(shade);
@@ -277,7 +278,7 @@ function beamTop(pHeight) {
   let beamHeight = 2 + pHeight * 10;
   for (let i = 0; i < beamHeight; i++) {
     let yPos = pHeight + 0.1 * -i;
-    let shade = random(60, 70);
+    let shade = random(60, 80);
     fill(shade);
     ellipse(beamCenterXRight, yPos, beamWidth, beamWidth / platformDepth);
     ellipse(beamCenterXLeft, yPos, beamWidth, beamWidth / platformDepth);
