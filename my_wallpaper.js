@@ -1,20 +1,22 @@
+//Quick note, this is pretty resource intensive, thusly, it spends quite a while processing on a white screen
+
 //this program makes extensive use of randomised modifiers, so not every set of settings will recreate the exact same result.
 //however, there are more than enough parameters that do not rely on randomisation to make determenistic wallpapers when needed.
 
 //my parameters
 let randomHeight = false; // make the heights of the platforms have variability
 let heightRandomness = 1.5; //variability of tha random height
-let platformHeight = 125; //adjust the height the platform spawns at.
+let platformHeight = 20; //adjust the height the platform spawns at.
 let platformThickness = 11;
 let platformDepth = 30; //how tall the ellipse is in relation to its width, adjusting depth
 
-let beamOffset = 40;
-let beamWidth = 10;
+let beamOffset = -10;
+let beamWidth = 9;
 //structure variables, 40 on beamOffset makes the beams line up.
 
 let mood = "mix"; //muted, pastel, mix
 let carVariation = 0.6; //variation between colours
-let randomCar = true; //random distrobution of cars
+let randomCar = false; //random distrobution of cars
 let carDistro = 0.7; //how many cars spawn when random
 
 let moveCarX = 0;
@@ -23,33 +25,33 @@ let scaleCarX = 1;
 let scaleCarY = 1;
 
 //wheel alterations
-let wheelWidth = 22;
-let rimSize = 0.5;
-let suspensionHeight = 0;
-let tiresX = 0;
-let spokeWidth = 20;
+let wheelWidth = 25;
+let rimSize = 0.6;
+let suspensionHeight = 2;
+let tiresX = -4;
+let spokeWidth = 22;
 let spokeStroke = 0.2;
 
 //clouds
 //warning, as higher clouddensity increasing calculation time, and may crash if too high.
 let clouds = true;
-let cloudDensity = 2;
-let cloudParticleSize = 0.4;
+let cloudDensity = 3;
+let cloudParticleSize = 0.3;
 
-let globalX = 1;
-let globalY = 1;
+let globalX = 1.4033;
+let globalY = 1.4033;
 
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(DEVELOP_GLYPH);
-  pWallpaper.resolution(NINE_LANDSCAPE);
+  pWallpaper.output_mode(GLIDE_WALLPAPER);
+  pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
 
 
   //Grid settings
-  pWallpaper.grid_settings.cell_width = 200; //use 214.14 for A3, 200 for ninewp
-  pWallpaper.grid_settings.cell_height = 200;
-  pWallpaper.grid_settings.row_offset = 100; //0 for A3, 100 for ninewp
+  pWallpaper.grid_settings.cell_width = 280 + 2/3; //a3 in pixels divided by 3
+  pWallpaper.grid_settings.cell_height = 280 + 2/3;
+  pWallpaper.grid_settings.row_offset = 165; //0 for A3, 100 for ninewp
 }
 
 
@@ -90,7 +92,6 @@ let bluePastelPal = ["#66b2de", "#4E6A80", "#B5CCD2", "#899DA2", "#4E7CA6", "#6E
 let activeCol = [];
 //clouds array
 let cloud = [];
-let shadow = false;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -150,7 +151,7 @@ activeCol = bluePastelPal;
 
   //structures, unhindered
   beamBottom(randHi);
-  platform(randHi, shadow);
+  platform(randHi);
   beamTop(randHi);
 
   //couldve used elif but this just split things a bit better mentally
@@ -160,10 +161,7 @@ activeCol = bluePastelPal;
     carBody(activeCol);
     drawTires(randHi);
     frontWing(randHi, activeCol);
-    shadow = true;
     pop();
-  } else {
-    shadow = false;
   }
 
   if (randomCar == false) {
@@ -171,10 +169,8 @@ activeCol = bluePastelPal;
     carBody(activeCol);
     drawTires(randHi);
     frontWing(randHi, activeCol);
-    shadow = true;
   }
 }
-
 function drawTires(randHi) {
   tires(randHi);
   wheel(randHi, 51, -9);
@@ -256,7 +252,7 @@ function beamBottom(pHeight) {
   }
 }
 
-function platform(pHeight, shadow) {
+function platform(pHeight ) {
   noStroke();
   let repet = platformThickness * 5
   for (let i = 0; i < repet; i++) {
