@@ -174,6 +174,7 @@ function setup_wallpaper(pWallpaper) {
 
 Wallpaper 4:
 
+//my parameters
 let randomHeight = false; // make the heights of the platforms have variability
 let heightRandomness = 1.5; //variability of tha random height
 let platformHeight = 50; //adjust the height the platform spawns at.
@@ -229,24 +230,55 @@ function setup_wallpaper(pWallpaper) {
 
 Wallpaper 5:
 
-//your parameter variables go here!
-let rect_width  = 20;
-let rect_height = 20;
-let paramter1 = 10;
-let paramter2 = true;
-let paramter3 = 50; 
-let paramter4 = 0; 
-let paramter5 = 60;
+//my parameters
+let randomHeight = true; // make the heights of the platforms have variability
+let heightRandomness = 0.8; //variability of tha random height
+let platformHeight = 60; //adjust the height the platform spawns at.
+let platformThickness = 40;
+let platformDepth = 6; //how tall the ellipse is in relation to its width, adjusting depth
+
+let beamOffset = 80;
+let beamWidth = 13;
+//structure variables, 40 on beamOffset makes the beams line up.
+
+let mood = "mix"; //muted, pastel, mix
+let carVariation = 0.5; //variation between colours
+let randomCar = true; //random distrobution of cars
+let carDistro = 0.8; //how many cars spawn when random
+
+let moveCarX = 15;
+let moveCarY = 0;
+let scaleCarX = 0.9;
+let scaleCarY = 0.85;
+
+//wheel alterations
+let wheelWidth = 35;
+let rimSize = 0.4;
+let suspensionHeight = -0;
+let tiresX = 0;
+let spokeWidth = 50;
+let spokeStroke = 0.1;
+
+//clouds
+//warning, as higher clouddensity increasing calculation time, and may crash if too high.
+let clouds = true;
+let cloudDensity = 4;
+let cloudParticleSize = 0.2;
+
+let globalX = 2;
+let globalY = 2.5;
+
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(GRID_WALLPAPER);
   pWallpaper.resolution(NINE_LANDSCAPE);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
 
+
   //Grid settings
-  pWallpaper.grid_settings.cell_width  = 100;
-  pWallpaper.grid_settings.cell_height = 100;
-  pWallpaper.grid_settings.row_offset  = 50;
+  pWallpaper.grid_settings.cell_width = 500; //a3 in pixels divided by 3
+  pWallpaper.grid_settings.cell_height = 500;
+  pWallpaper.grid_settings.row_offset = 0; //0 for A3, 100 for ninewp
 }
 
 /////////////////////////////////
@@ -255,24 +287,55 @@ function setup_wallpaper(pWallpaper) {
 
 Wallpaper 6:
 
-//your parameter variables go here!
-let rect_width  = 20;
-let rect_height = 20;
-let paramter1 = 10;
-let paramter2 = true;
-let paramter3 = 50; 
-let paramter4 = 0; 
-let paramter5 = 60;
+//my parameters
+let randomHeight = true; // make the heights of the platforms have variability
+let heightRandomness = 0.8; //variability of tha random height
+let platformHeight = 60; //adjust the height the platform spawns at.
+let platformThickness = 40;
+let platformDepth = 3; //how tall the ellipse is in relation to its width, adjusting depth
+
+let beamOffset = 40;
+let beamWidth = 13;
+//structure variables, 40 on beamOffset makes the beams line up.
+
+let mood = "mix"; //muted, pastel, mix
+let carVariation = 0.5; //variation between colours
+let randomCar = true; //random distrobution of cars
+let carDistro = 0.8; //how many cars spawn when random
+
+let moveCarX = 2;
+let moveCarY = 0;
+let scaleCarX = 1;
+let scaleCarY = 0.9;
+
+//wheel alterations
+let wheelWidth = 25;
+let rimSize = 0.4;
+let suspensionHeight = -0;
+let tiresX = 0;
+let spokeWidth = 21;
+let spokeStroke = 0.1;
+
+//clouds
+//warning, as higher clouddensity increasing calculation time, and may crash if too high.
+let clouds = true;
+let cloudDensity = 4;
+let cloudParticleSize = 0.2;
+
+let globalX = 1.25;
+let globalY = 1.25;
+
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(NINE_LANDSCAPE);
+  pWallpaper.output_mode(GLIDE_WALLPAPER);
+  pWallpaper.resolution(NINE_PORTRAIT);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
 
+
   //Grid settings
-  pWallpaper.grid_settings.cell_width  = 100;
-  pWallpaper.grid_settings.cell_height = 100;
-  pWallpaper.grid_settings.row_offset  = 50;
+  pWallpaper.grid_settings.cell_width = 250; //a3 in pixels divided by 3
+  pWallpaper.grid_settings.cell_height = 250;
+  pWallpaper.grid_settings.row_offset = 100; //0 for A3, 100 for ninewp
 }
 
 /////////////////////////////////
@@ -281,24 +344,55 @@ function setup_wallpaper(pWallpaper) {
 
 Wallpaper 7:
 
-//your parameter variables go here!
-let rect_width  = 20;
-let rect_height = 20;
-let paramter1 = 10;
-let paramter2 = true;
-let paramter3 = 50; 
-let paramter4 = 0; 
-let paramter5 = 60;
+//my parameters
+let randomHeight = true; // make the heights of the platforms have variability
+let heightRandomness = 3; //variability of tha random height
+let platformHeight = 12; //adjust the height the platform spawns at.
+let platformThickness = 20;
+let platformDepth = 1; //how tall the ellipse is in relation to its width, adjusting depth
+
+let beamOffset = 40;
+let beamWidth = 13;
+//structure variables, 40 on beamOffset makes the beams line up.
+
+let mood = "muted"; //muted, pastel, mix
+let carVariation = 0.5; //variation between colours
+let randomCar = true; //random distrobution of cars
+let carDistro = 0.8; //how many cars spawn when random
+
+let moveCarX = 2;
+let moveCarY = 0;
+let scaleCarX = 1;
+let scaleCarY = 0.9;
+
+//wheel alterations
+let wheelWidth = 40;
+let rimSize = 0.4;
+let suspensionHeight = -0;
+let tiresX = 0;
+let spokeWidth = 40;
+let spokeStroke = 0.3;
+
+//clouds
+//warning, as higher clouddensity increasing calculation time, and may crash if too high.
+let clouds = true;
+let cloudDensity = 4;
+let cloudParticleSize = 0.2;
+
+let globalX = 1.25;
+let globalY = 1.25;
+
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(NINE_LANDSCAPE);
+  pWallpaper.output_mode(GLIDE_WALLPAPER);
+  pWallpaper.resolution(NINE_PORTRAIT);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
 
+
   //Grid settings
-  pWallpaper.grid_settings.cell_width  = 100;
-  pWallpaper.grid_settings.cell_height = 100;
-  pWallpaper.grid_settings.row_offset  = 50;
+  pWallpaper.grid_settings.cell_width = 250; //a3 in pixels divided by 3
+  pWallpaper.grid_settings.cell_height = 250;
+  pWallpaper.grid_settings.row_offset = 100; //0 for A3, 100 for ninewp
 }
 
 /////////////////////////////////
@@ -307,24 +401,55 @@ function setup_wallpaper(pWallpaper) {
 
 Wallpaper 8:
 
-//your parameter variables go here!
-let rect_width  = 20;
-let rect_height = 20;
-let paramter1 = 10;
-let paramter2 = true;
-let paramter3 = 50; 
-let paramter4 = 0; 
-let paramter5 = 60;
+//my parameters
+let randomHeight = false; // make the heights of the platforms have variability
+let heightRandomness = 3; //variability of tha random height
+let platformHeight = 50; //adjust the height the platform spawns at.
+let platformThickness = 5;
+let platformDepth = 10; //how tall the ellipse is in relation to its width, adjusting depth
+
+let beamOffset = 40;
+let beamWidth = 12;
+//structure variables, 40 on beamOffset makes the beams line up.
+
+let mood = "muted"; //muted, pastel, mix
+let carVariation = 1; //variation between colours
+let randomCar = false; //random distrobution of cars
+let carDistro = 0.8; //how many cars spawn when random
+
+let moveCarX = 2;
+let moveCarY = 0;
+let scaleCarX = 1;
+let scaleCarY = 0.9;
+
+//wheel alterations
+let wheelWidth = 29;
+let rimSize = 0.4;
+let suspensionHeight = -0;
+let tiresX = 0;
+let spokeWidth = 30;
+let spokeStroke = 0.2;
+
+//clouds
+//warning, as higher clouddensity increasing calculation time, and may crash if too high.
+let clouds = true;
+let cloudDensity = 0.5;
+let cloudParticleSize = 0.2;
+
+let globalX = 0.75;
+let globalY = 0.75;
+
 
 function setup_wallpaper(pWallpaper) {
-  pWallpaper.output_mode(GRID_WALLPAPER);
-  pWallpaper.resolution(NINE_LANDSCAPE);
+  pWallpaper.output_mode(GLIDE_WALLPAPER);
+  pWallpaper.resolution(NINE_PORTRAIT);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
 
+
   //Grid settings
-  pWallpaper.grid_settings.cell_width  = 100;
-  pWallpaper.grid_settings.cell_height = 100;
-  pWallpaper.grid_settings.row_offset  = 50;
+  pWallpaper.grid_settings.cell_width = 150; //a3 in pixels divided by 3
+  pWallpaper.grid_settings.cell_height = 150;
+  pWallpaper.grid_settings.row_offset = 50; //0 for A3, 100 for ninewp
 }
 
 
@@ -333,24 +458,55 @@ function setup_wallpaper(pWallpaper) {
 
 Wallpaper 9:
 
-//your parameter variables go here!
-let rect_width  = 20;
-let rect_height = 20;
-let paramter1 = 10;
-let paramter2 = true;
-let paramter3 = 50; 
-let paramter4 = 0; 
-let paramter5 = 60;
+//my parameters
+let randomHeight = false; // make the heights of the platforms have variability
+let heightRandomness = 3; //variability of tha random height
+let platformHeight = 50; //adjust the height the platform spawns at.
+let platformThickness = 5;
+let platformDepth = 10; //how tall the ellipse is in relation to its width, adjusting depth
+
+let beamOffset = 40;
+let beamWidth = 12;
+//structure variables, 40 on beamOffset makes the beams line up.
+
+let mood = "pastel"; //muted, pastel, mix
+let carVariation = 0.5; //variation between colours
+let randomCar = false; //random distrobution of cars
+let carDistro = 0.8; //how many cars spawn when random
+
+let moveCarX = 2;
+let moveCarY = 0;
+let scaleCarX = 1;
+let scaleCarY = 0.9;
+
+//wheel alterations
+let wheelWidth = 20;
+let rimSize = 0.4;
+let suspensionHeight = -0;
+let tiresX = 0;
+let spokeWidth = 10;
+let spokeStroke = 0.2;
+
+//clouds
+//warning, as higher clouddensity increasing calculation time, and may crash if too high.
+let clouds = true;
+let cloudDensity = 1;
+let cloudParticleSize = 1.2;
+
+let globalX = 1;
+let globalY = 1;
+
 
 function setup_wallpaper(pWallpaper) {
   pWallpaper.output_mode(GRID_WALLPAPER);
   pWallpaper.resolution(NINE_LANDSCAPE);
   pWallpaper.show_guide(false); //set this to false when you're ready to print
 
+
   //Grid settings
-  pWallpaper.grid_settings.cell_width  = 100;
-  pWallpaper.grid_settings.cell_height = 100;
-  pWallpaper.grid_settings.row_offset  = 50;
+  pWallpaper.grid_settings.cell_width = 200; //a3 in pixels divided by 3
+  pWallpaper.grid_settings.cell_height = 150;
+  pWallpaper.grid_settings.row_offset = 100; //0 for A3, 100 for ninewp
 }
 
 /////////////////////////////////
