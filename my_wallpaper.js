@@ -112,15 +112,13 @@ function symbols() {
   //randHi is used around this, it is simply another variable for a random Height.
   //the weighting between the colour combos
   if (random(0, 1) < carVariation && mood == "muted") {
-    activeCol = redPal;
-  } else {
-    activeCol = bluePal;
+    arrayMix = [redPal, bluePal];
+    activeCol = random(arrayMix);
   }
 
   if (random(0, 1) < carVariation && mood == "pastel") {
-    activeCol = redPastelPal;
-  } else {
-    activeCol = bluePastelPal;
+    arrayMix = [redPastelPal, bluePastelPal];
+    activeCol = random(arrayMix);
   }
   if (mood == "mix") {
     arrayMix = [redPal, bluePal, redPastelPal, bluePastelPal];
@@ -171,6 +169,7 @@ function symbols() {
     shadow = true;
   }
 }
+
 function drawTires(randHi) {
   tires(randHi);
   wheel(randHi, 51, -9);
